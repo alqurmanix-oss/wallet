@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>القرماني إكس AQX</title>
+<style>
+:root{--v:#7a4df0;--l:#b9a3f5;--s:#4fc3f7;--ink:#2a1766}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;font-family:system-ui,"Segoe UI",Tahoma,sans-serif;color:var(--ink);background:#05020f}
+a{color:inherit;text-decoration:none}
+/* ===== بوابة الدخول ===== */
+#gate{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 30% 20%,#4b2a9a,transparent 55%),radial-gradient(ellipse at 75% 70%,#12507a,transparent 55%),#070320;transition:opacity 1.4s,transform 1.6s}
+#gate.go{opacity:0;transform:scale(1.15);pointer-events:none}
+#gc{position:absolute;inset:0;width:100%;height:100%}
+#fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#gs{position:absolute;bottom:calc(8% + env(safe-area-inset-bottom,0px));width:100%;text-align:center;color:#fff;font-size:clamp(1.3rem,4.5vw,2.5rem);font-weight:700;text-shadow:0 0 20px #b9a3f5,0 0 40px #4fc3f7}
+#gb{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));inset-inline-end:16px;background:rgba(255,255,255,.18);border:1px solid #fff8;color:#fff;border-radius:30px;padding:8px 16px;cursor:pointer;font-family:inherit}
+/* ===== الهيدر والتبويبات ===== */
+header{position:fixed;top:0;inset-inline:0;z-index:20;display:flex;gap:10px;align-items:center;padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;background:rgba(255,255,255,.75);backdrop-filter:blur(14px);border-bottom:1px solid #d9ccff}
+.lg{font-weight:800;color:var(--v);font-size:1.3rem;letter-spacing:.08em;text-shadow:0 0 12px var(--l)}
+.tabs{display:flex;gap:6px;margin-inline-start:auto}
+.tabs button{border:1px solid var(--l);background:#fff;color:var(--ink);border-radius:20px;padding:8px 18px;font-weight:700;font-size:.9rem;font-family:inherit;cursor:pointer}
+.tabs button.on{background:linear-gradient(135deg,var(--v),var(--s));color:#fff;border-color:transparent}
+.pn{position:fixed;inset:0;padding-top:calc(56px + env(safe-area-inset-top,0px));display:none}
+.pn.on{display:block}
+/* ===== الرئيسية (فاتحة، بدون سواد) ===== */
+#home{overflow-y:auto;background:linear-gradient(180deg,#fff,#f1ebff 35%,#e6f6ff 70%,#f5efff)}
+.aur{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.bl{position:absolute;width:55vmax;height:55vmax;border-radius:50%;filter:blur(60px);opacity:.45;animation:fl 18s ease-in-out infinite alternate}
+.bl:nth-child(1){background:#c9b6ff;top:-20%;inset-inline-start:-10%}
+.bl:nth-child(2){background:#9fe3ff;bottom:-25%;inset-inline-end:-10%;animation-delay:-6s}
+.bl:nth-child(3){background:#ffd6f5;top:30%;left:35%;animation-delay:-12s}
+@keyframes fl{to{transform:translate(8vw,6vh) scale(1.15)}}
+.sp{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px #b9a3f5;animation:tw 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.15;transform:scale(.4)}}
+.hero{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding:30px 6vw;min-height:78vh}
+.scene{position:relative;width:min(380px,80vw);aspect-ratio:1;margin:auto}
+.core{position:absolute;inset:30%;border-radius:50%;display:grid;place-items:center;font-size:2.2rem;font-weight:800;color:#fff;background:radial-gradient(circle at 35% 30%,#fff,#b9a3f5 40%,#7a4df0);box-shadow:0 0 60px #b9a3f5,0 0 120px #4fc3f788;animation:pu 4s ease-in-out infinite}
+@keyframes pu{50%{transform:scale(1.07)}}
+.rg{position:absolute;inset:8%;border-radius:50%;border:2px dashed #b9a3f5aa;animation:sp 30s linear infinite}
+.rg.b{inset:-2%;border-color:#4fc3f788;animation-duration:44s;animation-direction:reverse}
+@keyframes sp{to{transform:rotate(360deg)}}
+.wd{position:absolute;left:0;top:0;width:52px;height:52px;margin:-26px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;background:rgba(255,255,255,.85);border:1px solid var(--l);box-shadow:0 6px 20px #7a4df055}
+.hero h1{font-size:clamp(1.8rem,4.5vw,3rem);margin:0;color:var(--v);text-shadow:0 0 24px #d9ccff}
+.hero h2{font-size:clamp(1.4rem,3.5vw,2.3rem);margin:8px 0 14px}
+.hero p{line-height:1.9;max-width:34em}
+.btn{display:inline-block;padding:12px 24px;border-radius:30px;background:linear-gradient(135deg,var(--v),#9a6bff);color:#fff;font-weight:700;border:0;cursor:pointer;font-family:inherit;font-size:1rem;box-shadow:0 8px 22px #7a4df055;margin:4px 2px}
+.btn.o{background:#fff;color:var(--v);border:1px solid var(--v);box-shadow:none}
+.live{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:18px;padding:30px 6vw}
+.ob{width:130px;height:130px;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle at 30% 25%,#fff,#efe6ff 60%,#d9f2ff);border:1px solid var(--l);box-shadow:0 10px 30px #7a4df03a;animation:bb 5s ease-in-out infinite}
+.ob:nth-child(2n){animation-delay:-2s}.ob:nth-child(3n){animation-delay:-3.5s}
+@keyframes bb{50%{transform:translateY(-12px)}}
+.ob b{font-size:1.9rem;color:var(--v)}.ob span{font-size:.78rem}
+.cta{position:relative;text-align:center;margin:30px 4vw;padding:60px 20px;border-radius:40px;background:linear-gradient(160deg,#f4efff,#dff3ff);border:1px solid #d9ccff;box-shadow:0 20px 60px #7a4df02a}
+.cta h2{font-size:clamp(1.8rem,5vw,3.2rem);margin:10px 0;color:var(--v)}
+.cta p{max-width:36em;margin:10px auto 24px;line-height:1.9}
+.bar{position:relative;overflow:hidden;white-space:nowrap;border-block:1px solid #d9ccff;background:rgba(255,255,255,.7)}
+.tr{display:inline-flex;gap:28px;padding:12px 0;animation:mq 45s linear infinite}
+[dir=ltr] .tr{animation-direction:reverse}
+@keyframes mq{to{transform:translateX(50%)}}
+.bar:hover .tr{animation-play-state:paused}
+.up{color:#0a8a4a}.dn{color:#c62828}
+.ad{position:relative;display:grid;place-items:center;height:90px;background:repeating-linear-gradient(45deg,#f6f1ff,#f6f1ff 12px,#efe7ff 12px,#efe7ff 24px);font-size:.85rem}
+.py{display:inline-block;padding:8px 18px;border-radius:14px;color:#fff;font-weight:800;box-shadow:0 4px 14px #0003,inset 0 0 12px #fff4}
+footer{position:relative;margin-top:30px;padding:50px 6vw 0;background:linear-gradient(#fff,#e9deff 45%,#d4c4ff)}
+.fc{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px}
+footer h3{margin:0 0 10px}footer ul{padding:0;margin:0}footer li{list-style:none;margin:6px 0}
+.soc{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.soc a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:.8rem}
+.wa{display:inline-block;margin-top:8px;background:#25d366;color:#fff;padding:10px 18px;border-radius:30px;font-weight:700}
+.fb{margin:34px -6vw 0;padding:16px 6vw;background:#5b2fc0;color:#fff;font-size:.85rem;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+@media(max-width:800px){.hero{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+/* ===== منظومتنا (المجرّة) ===== */
+#eco{background:#05020f;padding-top:0}
+#c{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
+.lb{position:fixed;left:0;top:0;z-index:3;padding:6px 14px;border-radius:20px;border:1px solid var(--l);background:rgba(20,10,60,.6);backdrop-filter:blur(8px);color:#fff;font-weight:700;font-size:.85rem;font-family:inherit;cursor:pointer;white-space:nowrap;box-shadow:0 0 14px #7a4df088}
+.lb:hover{background:var(--v)}
+#pn{position:fixed;z-index:6;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(380px,90vw);padding:18px;border-radius:22px;background:rgba(20,10,60,.78);backdrop-filter:blur(14px);border:1px solid var(--l);text-align:center;color:#fff;box-shadow:0 0 30px #7a4df0aa}
+#pn[hidden]{display:none}
+#pn .go{display:inline-block;margin-top:8px;padding:9px 22px;border-radius:24px;background:linear-gradient(135deg,var(--v),var(--s));font-weight:700}
+#px{position:absolute;top:8px;inset-inline-end:10px;background:none;border:0;color:#fff;font-size:1.1rem;cursor:pointer}
+#ht{position:fixed;bottom:calc(6px + env(safe-area-inset-bottom,0px));inset-inline:0;text-align:center;color:#fff;font-size:.78rem;opacity:.65;pointer-events:none}
+</style>
+</head>
+<body>
+
+<!-- بوابة الدخول -->
+<div id="gate"><canvas id="gc"></canvas><div id="fl"></div><div id="gs"></div><button id="gb">⏭ Skip</button></div>
+
+<header>
+  <span class="lg">AQX</span>
+  <div class="tabs"><button data-t="home" class="on" id="t1"></button><button data-t="eco" id="t2"></button></div>
+</header>
+
+<!-- تبويب الرئيسية -->
+<main id="home" class="pn on">
+  <div class="aur"><i class="bl"></i><i class="bl"></i><i class="bl"></i></div>
+  <div class="hero">
+    <div class="scene" id="scene"><i class="rg b"></i><i class="rg"></i><div class="core">AQX</div></div>
+    <div>
+      <h1>القرماني إكس AQX</h1>
+      <h2>عالم رقمي واحد.. إمكانات بلا حدود.</h2>
+      <p>اكتشف القرماني إكس AQX، منظومة متكاملة تجمع التكنولوجيا والأعمال والتجارة والخدمات والمشروعات في عالم واحد، لتفتح أمامك آفاقًا جديدة من الفرص والإمكانات.</p>
+      <button class="btn" onclick="show('eco')">اكتشف منظومة AQX</button>
+      <a class="btn o" href="signup.html">ابدأ رحلتك الآن</a>
+    </div>
+  </div>
+  <div class="live" id="live"></div>
+
+  <section class="cta">
+    <div class="core" style="position:relative;inset:auto;width:90px;height:90px;margin:auto;font-size:1.4rem">AQX</div>
+    <h2>رحلتك مع AQX تبدأ من هنا.</h2>
+    <p>انضم إلى منظومة متكاملة من المنصات والخدمات والمشروعات والفرص، واكتشف عالمًا جديدًا من الإمكانات.</p>
+    <a class="btn" href="signup.html">افتح حسابك في AQX</a>
+    <button class="btn o" onclick="show('eco')">استكشف المنظومة</button>
+    <a class="btn o" href="contact.html">تواصل معنا</a>
+  </section>
+
+  <div class="bar"><div class="tr" id="mk"></div></div>
+  <div class="ad">إعلان · AQX AD SPACE — مساحة إعلانية <a href="ads.html" style="text-decoration:underline;margin-inline-start:8px">اعرض إعلانك</a></div>
+  <div class="bar"><div class="tr" id="py"></div></div>
+
+  <footer>
+    <div class="fc">
+      <div><h3>القرماني إكس AQX</h3><b>منظومة متكاملة تصنع فرص المستقبل</b>
+        <p style="line-height:1.8">القرماني إكس AQX منظومة متكاملة تجمع عوالم التكنولوجيا والأعمال والتجارة والخدمات والمشروعات، وتعمل على بناء بيئة مترابطة تفتح آفاقًا جديدة للابتكار والنمو والاستثمار، وتصنع فرصًا حقيقية للأفراد والشركات والمؤسسات.</p></div>
+      <div><h3>تواصل مع AQX</h3><div class="soc" id="soc"></div>
+        <p>✉️ <a href="contact.html">راسلنا</a><br>📍 مصر، أسوان<br><a href="https://www.google.com/maps/search/?api=1&query=Aswan,Egypt" target="_blank" rel="noopener">🗺️ افتح الخريطة</a></p>
+        <a class="wa" href="https://wa.me/?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20AQX%20%F0%9F%92%9C" target="_blank" rel="noopener">💬 راسلنا على واتساب</a></div>
+      <div><h3>النشرة البريدية</h3><p>ابقَ على اتصال مع AQX. تابع الجديد والإعلانات والفرص والعروض عبر بريدك.</p>
+        <form onsubmit="event.preventDefault();location.href='newsletter.html'"><input type="email" required placeholder="بريدك الإلكتروني" style="padding:10px;border-radius:20px;border:1px solid var(--l);width:65%"> <button class="btn" style="padding:10px 16px">اشترك</button></form></div>
+      <div><h3>رأيك يصنع الفرق</h3><ul id="fbk"></ul></div>
+      <div><h3>تفضيلاتك</h3><ul id="prf"></ul></div>
+    </div>
+    <div class="fb"><span>© <span id="yr"></span> ALQURMANI X AQX — جميع الحقوق محفوظة</span><span>إصدار الموقع: AQX Web</span><span>🟢 يعمل · <a href="status.html">آخر تحديث</a></span></div>
+  </footer>
+</main>
+
+<!-- تبويب منظومتنا -->
+<section id="eco" class="pn">
+  <canvas id="c"></canvas>
+  <div id="pn" hidden><button id="px" aria-label="close">✕</button><b id="pt"></b><p id="pd"></p><a class="go" id="pa" href="#"></a></div>
+  <div id="ht"></div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),TH=THREE,L=navigator.language||'ar',AR=/^ar/i.test(L);
+const cl=(v,a=0,b=1)=>Math.min(Math.max(v,a),b);
+document.documentElement.lang=L;document.documentElement.dir=/^(ar|he|fa|ur)/i.test(L)?'rtl':'ltr';
+let cn='';try{cn=new Intl.DisplayNames([L],{type:'region'}).of((L.split('-')[1]||'EG').toUpperCase())}catch(e){}
+$('#t1').textContent=AR?'🏠 الرئيسية':'🏠 Home';$('#t2').textContent=AR?'🌌 منظومتنا':'🌌 Our Ecosystem';
+$('#ht').textContent=AR?'اسحب للدوران · عجلة الماوس للتقريب · اضغط على أي عالم':'Drag to orbit · Scroll to zoom · Tap a world';
+$('#yr').textContent=new Date().getFullYear();
+
+/* ================= بوابة الدخول ================= */
+const GATE=40; // مدة البوابة بالثواني — غيّرها كما تريد
+const VID='assets/video/gate-wormhole.mp4'; // فيديو اختياري داخل فتحة البوابة (لو غير موجود تظهر الدوامة فقط)
+let spoke=0;
+const say=()=>{
+  if(spoke||!window.speechSynthesis)return;
+  if(!speechSynthesis.getVoices().length&&!say.n){say.n=1;speechSynthesis.onvoiceschanged=say;setTimeout(say,700);return}
+  spoke=1;
+  const lg=AR?'ar-EG':'en-US',
+  u=new SpeechSynthesisUtterance(AR?'أهلاً بيك في القرماني إكس. عالم رقمي واحد، وإمكانات بلا حدود. ومرحبًا بزوارنا الكرام من '+cn+'.':'Welcome to Alqurmani X. One digital world, with limitless possibilities. Greetings to our visitors from '+cn+'.');
+  u.lang=lg;
+  const vs=speechSynthesis.getVoices(),pool=vs.filter(v=>v.lang.replace('_','-').toLowerCase()==lg.toLowerCase()).concat(vs.filter(v=>v.lang.slice(0,2)==lg.slice(0,2))),
+  bad=/\bmale\b|shakir|naayf|hamed|ahmed|david|mark|george|guy/i,good=/female|salma|hoda|laila|zira|hazel|samantha|aria|jenny|natural|google/i;
+  u.voice=pool.find(v=>good.test(v.name)&&!bad.test(v.name))||pool.find(v=>!bad.test(v.name))||pool[0]||null;
+  u.pitch=1.12;u.rate=.9;u.onerror=e=>{if(e.error=='not-allowed')spoke=0};
+  speechSynthesis.cancel();speechSynthesis.speak(u);
+};
+['pointerdown','keydown','touchstart','wheel'].forEach(e=>addEventListener(e,()=>{if(!spoke)setTimeout(say,60)},{passive:true}));
+setTimeout(say,200);
+
+(()=>{
+  let fin=0;const t0=performance.now(),g=$('#gate');
+  const done=()=>{if(fin)return;fin=1;g.classList.add('go');setTimeout(()=>g.remove(),1700)};
+  $('#gb').onclick=()=>{say();done()};
+  const rd=new TH.WebGLRenderer({canvas:$('#gc'),alpha:true,antialias:true}),sc=new TH.Scene(),cm=new TH.PerspectiveCamera(60,1,.1,1500);
+  const rz=()=>{rd.setSize(innerWidth,innerHeight,false);cm.aspect=innerWidth/innerHeight;cm.updateProjectionMatrix()};rz();addEventListener('resize',rz);
+  const vd=document.createElement('video');vd.muted=true;vd.loop=true;vd.playsInline=true;vd.setAttribute('playsinline','');vd.src=VID;vd.play().catch(()=>{});
+  const U={t:{value:0},w:{value:0},has:{value:0},vt:{value:new TH.VideoTexture(vd)}};
+  sc.add(new TH.AmbientLight(0xd8ceff,.9));const dl=new TH.DirectionalLight(0xffffff,1.2);dl.position.set(-30,40,60);sc.add(dl);
+  const R=10,G=new TH.Group();sc.add(G);
+  G.add(new TH.Mesh(new TH.TorusGeometry(R-.2,.22,12,128),new TH.MeshBasicMaterial({color:0x9a6bff})));
+  G.add(new TH.Mesh(new TH.TorusGeometry(R+.8,.55,16,160),new TH.MeshBasicMaterial({color:0x7a4df0,transparent:true,opacity:.5,blending:TH.AdditiveBlending,depthWrite:false})));
+  const rings=[0xb9a3f5,0x4fc3f7,0x7a4df0].map((c,i)=>{const m=new TH.Mesh(new TH.TorusGeometry(R*(.88-i*.05),.16,12,128),new TH.MeshBasicMaterial({color:c}));G.add(m);return m});
+  G.add(new TH.Mesh(new TH.CircleGeometry(R*.82,64),new TH.ShaderMaterial({uniforms:U,
+    vertexShader:'varying vec2 v;void main(){v=position.xy/8.2;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+    fragmentShader:'varying vec2 v;uniform float t,w,has;uniform sampler2D vt;void main(){float r=length(v),a=atan(v.y,v.x);vec3 c=mix(vec3(.1,.03,.35),vec3(.31,.76,.97),1.-r);c+=vec3(.6,.5,1.)*smoothstep(.2,1.,sin(a*5.+log(r+.02)*6.-t*2.))*.6*(1.-r*.6);c=mix(c,texture2D(vt,v*.5+.5).rgb*1.25,has*.9);c+=exp(-r*(4.-w*3.))*(.55+w*2.5);gl_FragColor=vec4(c,1.);}'})));
+  const pn=new TH.Mesh(new TH.SphereGeometry(34,48,48),new TH.MeshPhongMaterial({color:0xcdbbff,emissive:0x3a2288,shininess:25}));pn.position.set(-80,-38,-140);sc.add(pn);
+  const NS=2000,sp=new Float32Array(NS*3);for(let i=0;i<NS*3;i+=3){sp[i]=(Math.random()-.5)*400;sp[i+1]=(Math.random()-.5)*260;sp[i+2]=-400+Math.random()*500}
+  const sg=new TH.BufferGeometry();sg.setAttribute('position',new TH.BufferAttribute(sp,3));sc.add(new TH.Points(sg,new TH.PointsMaterial({color:0xffffff,size:1.3})));
+  const cap=AR?['الوصول إلى البوابة','تفعيل البوابة','العبور إلى عالم AQX','أهلاً بيك في القرماني إكس']:['Approaching the gateway','Activating the gate','Crossing into AQX','Welcome to Alqurmani X'];
+  const f=()=>{
+    if(fin)return;
+    const el=(performance.now()-t0)/1000,p=cl(el/GATE),w=Math.pow(cl((p-.4)/.45),2);
+    U.t.value=el;U.w.value=w;U.has.value=vd.readyState>1?1:0;
+    rings.forEach((r,i)=>{r.rotation.z+=.01*(1+p*4)*(i%2?-1:1);r.rotation.x=.35*i+Math.sin(el*.6+i)*.25});
+    for(let i=0;i<NS*3;i+=3){sp[i+2]+=.15+w*9;if(sp[i+2]>cm.position.z+10)sp[i+2]-=500}sg.attributes.position.needsUpdate=true;
+    const z=p<.4?70-34*cl(p/.4):36-71*Math.pow(cl((p-.4)/.45),1.6);
+    cm.position.set(Math.sin(el*.15)*5*(1-w),5*(1-w),z);cm.fov=60+40*w;cm.updateProjectionMatrix();cm.lookAt(0,4*(1-w),-90*w);
+    $('#fl').style.opacity=cl((p-.88)/.1);
+    $('#gs').textContent=cap[p<.2?0:p<.4?1:p<.85?2:3];
+    rd.render(sc,cm);if(p>=1)return done();requestAnimationFrame(f);
+  };f();
+})();
+
+/* ================= التبويبات ================= */
+let tab='home';
+const show=t=>{tab=t;document.querySelectorAll('.pn').forEach(e=>e.classList.toggle('on',e.id==t));document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t==t));if(t=='eco')rzE();document.querySelectorAll('.lb').forEach(b=>b.style.display=t=='eco'?'':'none')};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>show(b.dataset.t));
+
+/* ================= الرئيسية: الشريط والمدارات والتذييل ================= */
+const STATS=[['منصة نشطة',3],['خدمة متاحة',40],['منتج في المتجر',120],['مشروع قائم',4],['زائر الآن',1]]; // قيم تجريبية — اربطها بأرقام النظام الفعلية
+$('#live').innerHTML=STATS.map(s=>`<div class="ob"><b data-n="${s[1]}">0</b><span>${s[0]}</span></div>`).join('')+'<div style="align-self:center;font-size:.8rem">🔴 LIVE · أرقام تجريبية</div>';
+document.querySelectorAll('[data-n]').forEach(e=>{const n=+e.dataset.n,t=performance.now();const u=()=>{const k=cl((performance.now()-t)/2500);e.textContent=Math.round(n*k);if(k<1)requestAnimationFrame(u)};u()});
+for(let i=0;i<40;i++){const s=document.createElement('i');s.className='sp';s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s`;$('.aur').append(s)}
+const MK=[['USD','48.2',1],['EUR','52.1',0],['GBP','61.3',1],['SAR','12.8',1],['ذهب 24','—',1],['ذهب 21','—',0],['ذهب 18','—',1],['أوقية الذهب','—',1],['الفضة','—',0]]; // قيم تجريبية
+const mk=MK.map(m=>`<a href="market-${encodeURIComponent(m[0])}.html">${m[0]} <b>${m[1]}</b> <span class="${m[2]?'up':'dn'}">${m[2]?'▲':'▼'}</span></a>`).join('');
+$('#mk').innerHTML='<span>📈 AQX LIVE MARKET (تجريبي)</span>'+mk+mk+mk;
+const PY=[['Binance','#F0B90B','#000'],['Vodafone Cash','#E60000'],['Orange Cash','#FF7900'],['Etisalat Cash','#6BB539'],['WE Cash','#5B2D8E'],['Fawry','#FFC400','#000'],['InstaPay','#7B2D8B'],['البريد المصري','#00539B'],['Mashreq Neo','#FF5A1F'],['CIB','#003B7A'],['PayPal','#003087'],['Payoneer','#FF4800'],['WebMoney','#1F5FB5'],['Skrill','#862165'],['Payeer','#2F9FDD'],['Neteller','#83BA3B'],['Bankak','#C8102E']];
+const py=PY.map(p=>`<a class="py" href="payments-${p[0].replace(/\W+/g,'').toLowerCase()||'post'}.html" style="background:linear-gradient(135deg,${p[1]},${p[1]}cc);color:${p[2]||'#fff'}">${p[0]}</a>`).join('');
+$('#py').innerHTML=py+py;
+$('#soc').innerHTML=[['W','#25D366','https://wa.me/'],['f','#1877F2','https://facebook.com/'],['✈','#229ED9','https://t.me/'],['X','#111','https://x.com/'],['▶','#F00','https://youtube.com/'],['◎','linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)','https://instagram.com/'],['✉','#7a4df0','contact.html']].map(s=>`<a href="${s[2]}" target="_blank" rel="noopener" style="background:${s[1]}">${s[0]}</a>`).join('');
+$('#fbk').innerHTML=[['⭐','قيّم تجربتك مع AQX','rate'],['📨','أرسل ملاحظاتك','feedback'],['💡','اقترح تطويرًا جديدًا','suggest'],['📊','شارك في استطلاعات الرأي','polls'],['🚩','أبلغ عن مشكلة في الموقع','report']].map(a=>`<li><a href="feedback-${a[2]}.html">${a[0]} ${a[1]}</a></li>`).join('');
+$('#prf').innerHTML=[['🌍','اللغة المفضلة','language'],['🕒','الدولة والمنطقة الزمنية','region'],['↔️','اتجاه العرض RTL / LTR','direction'],['🍪','إدارة ملفات تعريف الارتباط','cookies'],['🔔','تفضيلات الإشعارات','notifications'],['✨','المؤثرات والحركة','motion'],['♿','سهولة الوصول','accessibility']].map(a=>`<li><a href="preferences-${a[2]}.html">${a[0]} ${a[1]}</a></li>`).join('');
+/* الأيقونات الستة تدور حول شعار AQX */
+const WI=['💰','🏥','💻','💼','📦','🌱'].map(e=>{const d=document.createElement('div');d.className='wd';d.textContent=e;$('#scene').append(d);return d});
+
+/* ================= منظومتنا: المجرّة (كما هي) ================= */
+const rd=new TH.WebGLRenderer({canvas:$('#c'),antialias:true});rd.setPixelRatio(Math.min(devicePixelRatio||1,2));rd.setClearColor(0x05020f);
+const sc=new TH.Scene(),cm=new TH.PerspectiveCamera(60,1,.1,3000);
+const rzE=()=>{const e=$('#eco');rd.setSize(e.clientWidth||innerWidth,e.clientHeight||innerHeight,false);cm.aspect=(e.clientWidth||innerWidth)/(e.clientHeight||innerHeight);cm.updateProjectionMatrix()};rzE();addEventListener('resize',rzE);
+const NG=36000,gp=new Float32Array(NG*3),gc=new Float32Array(NG*3),c1=new TH.Color(0xffc8ff),c2=new TH.Color(0x4fc3f7),c3=new TH.Color(0x7a4df0);
+for(let i=0;i<NG;i++){const r=Math.pow(Math.random(),.6)*95,a=(i%3)*2.094+r*.07+(Math.random()-.5)*.6,h=(Math.random()-.5)*Math.max(1,8-r*.06)*Math.random(),c=c1.clone().lerp(c3,Math.min(r/35,1)).lerp(c2,Math.max(0,Math.min((r-35)/60,1)));gp[i*3]=Math.cos(a)*r;gp[i*3+1]=h;gp[i*3+2]=Math.sin(a)*r;gc[i*3]=c.r;gc[i*3+1]=c.g;gc[i*3+2]=c.b}
+const gg=new TH.BufferGeometry();gg.setAttribute('position',new TH.BufferAttribute(gp,3));gg.setAttribute('color',new TH.BufferAttribute(gc,3));
+const gal=new TH.Points(gg,new TH.PointsMaterial({size:.55,vertexColors:true,transparent:true,blending:TH.AdditiveBlending,depthWrite:false}));sc.add(gal);
+const NT=1800,st=new Float32Array(NT*3);for(let i=0;i<NT*3;i++)st[i]=(Math.random()-.5)*1500;const tg=new TH.BufferGeometry();tg.setAttribute('position',new TH.BufferAttribute(st,3));sc.add(new TH.Points(tg,new TH.PointsMaterial({size:1.4,color:0xffffff,transparent:true,opacity:.8})));
+const tex=f=>{const c=document.createElement('canvas');c.width=512;c.height=256;f(c.getContext('2d'));return new TH.CanvasTexture(c)};
+const core=new TH.Sprite(new TH.SpriteMaterial({map:tex(x=>{const g=x.createRadialGradient(256,128,0,256,128,128);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.25,'rgba(185,163,245,.7)');g.addColorStop(1,'rgba(79,195,247,0)');x.fillStyle=g;x.fillRect(0,0,512,256)}),blending:TH.AdditiveBlending,depthWrite:false}));core.scale.set(110,55,1);sc.add(core);
+const aq=new TH.Sprite(new TH.SpriteMaterial({map:tex(x=>{x.font='800 150px Arial,sans-serif';x.textAlign='center';x.textBaseline='middle';x.shadowColor='#b9a3f5';x.shadowBlur=30;x.fillStyle='#fff';x.fillText('AQX',256,135)}),transparent:true,depthWrite:false}));aq.scale.set(26,13,1);sc.add(aq);
+sc.add(new TH.AmbientLight(0x8877cc,.5));sc.add(new TH.PointLight(0xffffff,2.6,260));
+const P=[['💰','المنظومة المالية','Finance','eco-finance.html',0x4fc3f7,22,'الحسابات والمحافظ والمدفوعات','Accounts, wallets & payments'],['🏥','المنظومة الطبية','Medical','eco-medical.html',0xff7aa8,30,'الخدمات والمنصات الطبية','Medical services & platforms'],['💻','المنظومة التقنية والرقمية','Tech & Digital','eco-tech.html',0x9a6bff,39,'التكنولوجيا والأدوات والمنصات','Technology, tools & platforms'],['💼','منظومة الأعمال والخدمات','Business & Services','eco-business.html',0xffc857,48,'خدمات الأفراد والشركات','Services for people & companies'],['📦','منظومة التجارة والتوريد','Trade & Supply','eco-trade.html',0x5de0a8,57,'المتجر والبيع والشراء والتوريد','Store, trade & supply'],['🌱','المبادرات والمشروعات','Initiatives','eco-initiatives.html',0xff9f6b,66,'المشروعات الواقعية والمجتمعية','Real-world & community projects']];
+const W=P.map((p,i)=>{const m=new TH.Mesh(new TH.SphereGeometry(2.6,32,32),new TH.MeshPhongMaterial({color:p[4],emissive:p[4],emissiveIntensity:.35,shininess:40}));sc.add(m);m.add(new TH.Mesh(new TH.SphereGeometry(3.7,24,24),new TH.MeshBasicMaterial({color:p[4],transparent:true,opacity:.18,blending:TH.AdditiveBlending,depthWrite:false})));
+  const o=new TH.Mesh(new TH.RingGeometry(p[5]-.06,p[5]+.06,160),new TH.MeshBasicMaterial({color:p[4],transparent:true,opacity:.3,side:TH.DoubleSide}));o.rotation.x=Math.PI/2;sc.add(o);
+  const d=document.createElement('button');d.className='lb';d.style.display='none';d.textContent=p[0]+' '+(AR?p[1]:p[2]);d.onclick=()=>pick(i);document.body.append(d);return{m,d,a:i*1.05,s:.35/(1+i*.3)}});
+let yaw=0,pit=.5,dist=420,td=105,drag=0,lx=0,ly=0,foc=-1,pulse=0,t0=performance.now(),last=t0;const tv=new TH.Vector3(),v3=new TH.Vector3();
+addEventListener('pointerdown',e=>{if(tab!='eco'||e.target.closest('.lb,#pn,header'))return;drag=1;lx=e.clientX;ly=e.clientY;pulse=1});
+addEventListener('pointermove',e=>{if(drag){yaw-=(e.clientX-lx)*.005;pit=cl(pit+(e.clientY-ly)*.004,-.2,1.3);lx=e.clientX;ly=e.clientY}});
+addEventListener('pointerup',()=>drag=0);
+addEventListener('wheel',e=>{if(tab=='eco')td=cl(td+e.deltaY*.08,25,190)},{passive:true});
+const pick=i=>{foc=i;td=20;const p=P[i];$('#pt').textContent=p[0]+' '+(AR?p[1]:p[2]);$('#pd').textContent=AR?p[6]:p[7];$('#pa').href=p[3];$('#pa').textContent=AR?'ادخل العالم':'Enter world';$('#pn').hidden=false};
+$('#px').onclick=()=>{foc=-1;td=105;$('#pn').hidden=true};
+addEventListener('keydown',e=>{if(e.key=='Escape')$('#px').click()});
+
+/* ================= الحلقة الرئيسية ================= */
+const loop=n=>{
+  const dt=Math.min((n-last)/1000,.1),el=(n-t0)/1000;last=n;
+  if(tab=='home'){
+    const s=$('#scene'),r=s.clientWidth/2;
+    WI.forEach((d,i)=>{const a=el*.5+i*1.047;d.style.left=r+Math.cos(a)*r*.92+'px';d.style.top=r+Math.sin(a)*r*.92+'px'});
+  }else{
+    const intro=el<10;
+    dist+=(td-dist)*(1-Math.exp(-dt*(intro?.45:2.5)));if(!drag)yaw+=dt*(intro?.18:.04);
+    gal.rotation.y+=dt*.01;pulse*=.95;const k=1+.06*Math.sin(el*2)+pulse*.25;aq.scale.set(26*k,13*k,1);core.scale.set(110*k,55*k,1);
+    W.forEach((w,i)=>{w.a+=w.s*dt*.3;const R=P[i][5];w.m.position.set(Math.cos(w.a)*R,Math.sin(w.a*2+i)*1.6,Math.sin(w.a)*R);w.m.rotation.y+=dt*.5;
+      v3.copy(w.m.position).project(cm);const on=v3.z<1&&!(foc>=0&&foc!=i);w.d.style.display=on?'':'none';
+      if(on)w.d.style.transform=`translate(${(v3.x*.5+.5)*innerWidth}px,${(-v3.y*.5+.5)*innerHeight-26}px) translate(-50%,-50%)`});
+    tv.lerp(foc>=0?W[foc].m.position:v3.set(0,0,0),1-Math.exp(-dt*3));
+    cm.position.set(tv.x+Math.sin(yaw)*Math.cos(pit)*dist,tv.y+Math.sin(pit)*dist,tv.z+Math.cos(yaw)*Math.cos(pit)*dist);cm.lookAt(tv);rd.render(sc,cm);
+  }
+  requestAnimationFrame(loop);
+};
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
