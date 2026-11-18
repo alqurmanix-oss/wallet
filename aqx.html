@@ -13,13 +13,16 @@ body{margin:0;font-family:Tajawal,system-ui,sans-serif;background:linear-gradien
 a{color:inherit;text-decoration:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 /* gateway */
-#gate{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 50% 55%,#8a5cf0,#2c1a6b 55%,#120a33);overflow:hidden;transition:opacity 1.2s,transform 1.4s}
-#gate.go{opacity:0;transform:scale(2.4);pointer-events:none}
+#gate{position:fixed;inset:0;z-index:100;background:#2a1a7a;overflow:hidden;transition:opacity 1.4s ease,transform 1.6s ease}
+#gate.go{opacity:0;transform:scale(1.15);pointer-events:none}
 #gate canvas{position:absolute;inset:0;width:100%;height:100%}
-#gt{position:absolute;top:8%;width:100%;text-align:center;color:#fff;text-shadow:0 0 24px #b9a3f5}
-#gt b{font-size:clamp(2rem,7vw,4.5rem);letter-spacing:.08em;display:block}
-#gt small{letter-spacing:.3em;opacity:.85}
-#gb{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.15);border:1px solid #fff8;color:#fff;border-radius:30px;padding:10px 22px;font:inherit;cursor:pointer;backdrop-filter:blur(8px)}
+#gs{position:absolute;bottom:calc(8% + env(safe-area-inset-bottom,0px));width:100%;text-align:center;color:#fff;text-shadow:0 0 20px #b9a3f5,0 0 40px #4fc3f7;padding:0 16px}
+#gs b{display:block;font-size:clamp(1.3rem,4.5vw,2.6rem);transition:opacity .5s}
+#gs i{display:block;margin:14px auto 0;height:3px;width:min(320px,70vw);background:#fff3;border-radius:3px;overflow:hidden}
+#gs u{display:block;height:100%;width:0;background:linear-gradient(90deg,#4fc3f7,#fff,#b9a3f5);box-shadow:0 0 12px #fff}
+#gb{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));inset-inline-end:16px;background:rgba(255,255,255,.18);border:1px solid #fff8;color:#fff;border-radius:30px;padding:8px 16px;font:inherit;cursor:pointer;backdrop-filter:blur(8px)}
+#gh{position:absolute;top:calc(18px + env(safe-area-inset-top,0px));inset-inline-start:16px;color:#fff;font-size:.85rem;animation:pl 1.6s infinite}
+@keyframes pl{50%{opacity:.35}}
 /* header */
 header{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:14px;padding:14px 22px;background:var(--g);backdrop-filter:blur(16px);border-bottom:1px solid #d9ccff;transition:padding .3s}
 header.sm{padding:6px 22px}
@@ -97,7 +100,7 @@ footer h3{color:var(--vd);margin:0 0 10px}footer li{list-style:none;margin:6px 0
 </style>
 </head>
 <body>
-<div id="gate"><canvas id="gc"></canvas><div id="gt"><b>AQX</b><small>ALQURMANI X · BEYOND THE ORDINARY</small></div><button id="gb">🔊 تفعيل الصوت والدخول · Enter with sound</button></div>
+<div id="gate"><canvas id="gc"></canvas><div id="gs"><b id="gst"></b><i><u id="gp"></u></i></div><button id="gb">⏭ Skip</button><div id="gh" hidden></div></div>
 
 <header id="hd"><a class="logo" href="#top">AQX</a><nav id="hn"></nav><button class="ic" title="بحث" onclick="go('search.html')">🔍</button><button class="ic" title="إشعارات" onclick="go('notifications.html')">🔔</button><button class="ic" id="lg" title="اللغة">🌐</button><button class="ic" title="الحساب" onclick="go('account.html')">👤</button><button id="mb" aria-label="القائمة">AQX</button></header>
 <div id="ov"></div>
@@ -214,16 +217,73 @@ addEventListener('scroll',()=>$('#hd').classList.toggle('sm',scrollY>60));
 /* hero orb */
 (()=>{const cv=$('#orb'),x=cv.getContext('2d'),N=90,P=[];for(let i=0;i<N;i++){const a=Math.acos(1-2*(i+.5)/N),b=Math.PI*(1+Math.sqrt(5))*i;P.push([Math.sin(a)*Math.cos(b),Math.cos(a),Math.sin(a)*Math.sin(b)])}let t=0;(function f(){t+=.006;x.clearRect(0,0,460,460);const R=170,pr=P.map(p=>{const c=Math.cos(t),s=Math.sin(t),X=p[0]*c-p[2]*s,Z=p[0]*s+p[2]*c;return[230+X*R,230+p[1]*R,Z]});x.lineWidth=.6;for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){const dx=pr[i][0]-pr[j][0],dy=pr[i][1]-pr[j][1];if(dx*dx+dy*dy<2400){x.strokeStyle=`rgba(109,63,214,${.15+.25*(pr[i][2]+1)/2})`;x.beginPath();x.moveTo(pr[i][0],pr[i][1]);x.lineTo(pr[j][0],pr[j][1]);x.stroke()}}pr.forEach(p=>{x.fillStyle=p[2]>0?'#4fc3f7':'#b9a3f5';x.beginPath();x.arc(p[0],p[1],2.5+p[2]*1.5,0,7);x.fill()});requestAnimationFrame(f)})()})();
 /* gateway */
-(()=>{const cv=$('#gc'),x=cv.getContext('2d');let W,H;const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rs();addEventListener('resize',rs);const st=Array.from({length:220},()=>[Math.random(),Math.random(),Math.random()]);let t=0,done=false;
-function f(){if(done)return;t+=.016;x.clearRect(0,0,W,H);const cx=W/2,cy=H*.55,R=Math.min(W,H)*.3;
-st.forEach(s=>{x.fillStyle=`rgba(255,255,255,${.3+.7*Math.abs(Math.sin(t*s[2]*3+s[0]*9))})`;x.fillRect(s[0]*W,s[1]*H,1+s[2]*1.6,1+s[2]*1.6)});
-let g=x.createRadialGradient(W*.15,H*.25,5,W*.15,H*.25,R*.55);g.addColorStop(0,'#fff');g.addColorStop(1,'#7e57c2');x.fillStyle=g;x.beginPath();x.arc(W*.15,H*.25,R*.5,0,7);x.fill();
-for(let i=0;i<6;i++){x.strokeStyle=['#fff','#b9a3f5','#4fc3f7'][i%3];x.lineWidth=i<2?10:4;x.globalAlpha=i<2?.95:.7;x.save();x.translate(cx,cy);x.rotate(t*(i%2?-1:1)*(.2+i*.08));x.beginPath();x.ellipse(0,0,R*(1+i*.07),R*(1+i*.07)*(i<2?1:.96),0,0,7);x.setLineDash(i<2?[]:[30,18]);x.stroke();x.restore()}x.globalAlpha=1;x.setLineDash([]);
-g=x.createRadialGradient(cx,cy,0,cx,cy,R);g.addColorStop(0,'#fff');g.addColorStop(.35,'#4fc3f7');g.addColorStop(.7,'#6d3fd6');g.addColorStop(1,'#1a0b4a');x.fillStyle=g;x.beginPath();x.arc(cx,cy,R*.97,0,7);x.fill();
-for(let k=0;k<8;k++){const q=((t*.5+k/8)%1);x.strokeStyle=`rgba(255,255,255,${1-q})`;x.lineWidth=2;x.beginPath();x.arc(cx,cy,R*q,0,7);x.stroke()}
-requestAnimationFrame(f)}f();
-const enter=(snd)=>{if(done)return;sound=snd;if(snd){tone(440,.4);say('أهلاً بك في القرماني إكس. بوابتك إلى عالم رقمي واحد.','ar-EG');say('Welcome to Alqurmani X. Beyond the ordinary.','en-US')}$('#gate').classList.add('go');setTimeout(()=>{done=true;$('#gate').remove()},1500)};
-$('#gb').onclick=()=>enter(true);setTimeout(()=>enter(false),9000)})();
+(()=>{
+const cv=$('#gc'),x=cv.getContext('2d'),DUR=matchMedia('(prefers-reduced-motion:reduce)').matches?4:10;
+let W,H;const rs=()=>{const D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*D;cv.height=H*D;x.setTransform(D,0,0,D,0,0)};rs();addEventListener('resize',rs);
+const HE='🔊 Touch the screen to enable sound',HA='🔊 المس الشاشة لتفعيل الصوت';
+const T={
+ar:[['الوصول إلى البوابة','تفعيل البوابة','العبور إلى عالم AQX','أهلاً بيك في القرماني إكس'],'أهلاً بيك في القرماني إكس. اتفضّل ادخل.. عالم رقمي واحد، وإمكانات بلا حدود.','ar-EG',HA],
+en:[['Approaching the gateway','Activating the gate','Crossing into AQX','Welcome to Alqurmani X'],'Welcome to Alqurmani X. One digital world, with limitless possibilities.','en-US',HE],
+fr:[['Approche de la porte','Activation du portail','Passage vers AQX','Bienvenue chez Alqurmani X'],'Bienvenue chez Alqurmani X. Un seul monde numérique, des possibilités sans limites.','fr-FR',HE],
+es:[['Acercándonos a la puerta','Activando el portal','Cruzando hacia AQX','Bienvenido a Alqurmani X'],'Bienvenido a Alqurmani X. Un solo mundo digital, posibilidades sin límites.','es-ES',HE],
+de:[['Anflug auf das Tor','Portal wird aktiviert','Übergang zu AQX','Willkommen bei Alqurmani X'],'Willkommen bei Alqurmani X. Eine digitale Welt, grenzenlose Möglichkeiten.','de-DE',HE],
+tr:[['Kapıya yaklaşılıyor','Kapı etkinleştiriliyor','AQX dünyasına geçiş','Alqurmani X’e hoş geldiniz'],'Alqurmani X’e hoş geldiniz. Tek bir dijital dünya, sınırsız imkânlar.','tr-TR',HE],
+ru:[['Приближение к вратам','Активация портала','Переход в мир AQX','Добро пожаловать в Alqurmani X'],'Добро пожаловать в Alqurmani X. Один цифровой мир, безграничные возможности.','ru-RU',HE],
+pt:[['Aproximando-se do portal','Ativando o portal','Atravessando para a AQX','Bem-vindo à Alqurmani X'],'Bem-vindo à Alqurmani X. Um só mundo digital, possibilidades sem limites.','pt-BR',HE],
+it:[['Avvicinamento al portale','Attivazione del portale','Attraversamento verso AQX','Benvenuto in Alqurmani X'],'Benvenuto in Alqurmani X. Un unico mondo digitale, possibilità senza limiti.','it-IT',HE],
+zh:[['接近星门','星门启动','穿越至 AQX','欢迎来到 Alqurmani X'],'欢迎来到 Alqurmani X。一个数字世界，无限可能。','zh-CN',HE],
+ja:[['ゲートに接近中','ゲートを起動中','AQXの世界へ','Alqurmani X へようこそ'],'Alqurmani X へようこそ。ひとつのデジタル世界、無限の可能性。','ja-JP',HE]};
+const C=T[L.slice(0,2).toLowerCase()]||T.en;
+/* audio */
+let A,mg,mf,dl,os=[],fired={},spoken=false,fin=false,t0=performance.now(),stg=-1;
+const ok=()=>A&&A.state=='running';
+const unlock=()=>{try{A=A||new(window.AudioContext||webkitAudioContext)();A.resume&&A.resume()}catch(e){}if(ok()){sound=true;$('#gh').hidden=true}};
+['pointerdown','keydown','touchstart','wheel'].forEach(e=>addEventListener(e,unlock,{passive:true}));unlock();
+setTimeout(()=>{if(!ok()&&!fin){$('#gh').textContent=C[3];$('#gh').hidden=false}},500);
+const note=(f,at,d,v)=>{[1,2].forEach(m=>{const o=A.createOscillator(),g=A.createGain();o.frequency.value=f*m;g.gain.setValueAtTime(.0001,at);g.gain.exponentialRampToValueAtTime(v/m/m,at+.05);g.gain.exponentialRampToValueAtTime(.0001,at+d);o.connect(g);g.connect(A.destination);g.connect(dl);o.start(at);o.stop(at+d+.1)})};
+const amb=()=>{dl=A.createDelay();dl.delayTime.value=.34;const fb=A.createGain();fb.gain.value=.4;dl.connect(fb);fb.connect(dl);dl.connect(A.destination);mg=A.createGain();mg.gain.value=0;mg.gain.linearRampToValueAtTime(.7,A.currentTime+2);mf=A.createBiquadFilter();mf.type='lowpass';mf.frequency.value=250;[55,55.4,82.4,110.3].forEach(f=>{const o=A.createOscillator(),g=A.createGain();o.type=f>100?'sine':'sawtooth';o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(mf);o.start();os.push(o)});mf.connect(mg);mg.connect(A.destination)};
+const chimes=()=>[523,659,784,1047,1319].forEach((f,i)=>note(f,A.currentTime+i*.22,2.4,.1));
+const whoosh=()=>{const n=A.sampleRate*3.6,b=A.createBuffer(1,n,A.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;const s=A.createBufferSource();s.buffer=b;const f=A.createBiquadFilter();f.type='bandpass';f.Q.value=1.2;f.frequency.setValueAtTime(200,A.currentTime);f.frequency.exponentialRampToValueAtTime(5000,A.currentTime+3.4);const g=A.createGain();g.gain.setValueAtTime(.0001,A.currentTime);g.gain.exponentialRampToValueAtTime(.5,A.currentTime+2.6);g.gain.exponentialRampToValueAtTime(.0001,A.currentTime+3.6);s.connect(f);f.connect(g);g.connect(A.destination);s.start()};
+const bell=()=>[392,523,659,784,1047].forEach((f,i)=>note(f,A.currentTime+i*.05,4.5,.08));
+const speak=()=>{if(spoken||!ok()||!window.speechSynthesis)return;spoken=true;const u=new SpeechSynthesisUtterance(C[1]);u.lang=C[2];const vs=speechSynthesis.getVoices(),l=C[2].toLowerCase().replace('_','-'),p=v=>v.lang.toLowerCase().replace('_','-'),pool=vs.filter(v=>p(v)==l).concat(vs.filter(v=>p(v).slice(0,2)==l.slice(0,2))),bad=/\bmale\b|shakir|naayf|hamed|ahmed|david|mark|george|james|guy/i,good=/female|salma|hoda|laila|zira|hazel|samantha|victoria|google|aria|jenny|natural/i;u.voice=pool.find(v=>good.test(v.name)&&!bad.test(v.name))||pool.find(v=>!bad.test(v.name))||pool[0]||null;u.pitch=1.12;u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u)};
+const EV=[[0,amb],[2.3,chimes],[5,whoosh],[7.4,speak],[8.5,bell]];
+const audio=t=>{if(!ok())return;if(!mg)amb();mf.frequency.setTargetAtTime(250+t*260,A.currentTime,.3);EV.forEach(e=>{if(!fired[e[0]]&&t>=e[0]){fired[e[0]]=1;if(e[0]==0||e[0]==7.4||t-e[0]<1)e[1]()}})};
+/* visuals */
+const st=Array.from({length:260},()=>({a:Math.random()*6.283,r:Math.random(),s:Math.random()}));
+const cl=(v,a=0,b=1)=>Math.min(Math.max(v,a),b);
+const draw=t=>{
+const M=Math.max(W,H),cx=W/2,cy=H*.5,R=Math.min(W,H)*.26,w=Math.pow(cl((t-4.8)/4),2),act=cl((t-2)/1.5),z=t<5?1+t*.03:1.15*Math.exp((t-5)*.95);
+let g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#2a1a7a');g.addColorStop(.55,'#6d3fd6');g.addColorStop(1,'#7fd3ff');x.fillStyle=g;x.fillRect(0,0,W,H);
+[[.2,.3,'#b9a3f5'],[.8,.25,'#4fc3f7'],[.65,.8,'#e1d4ff']].forEach(n=>{const r=M*.45,q=x.createRadialGradient(n[0]*W,n[1]*H,0,n[0]*W,n[1]*H,r);q.addColorStop(0,n[2]+'99');q.addColorStop(1,n[2]+'00');x.fillStyle=q;x.fillRect(0,0,W,H)});
+x.lineCap='round';
+st.forEach(s=>{const Rr=s.r*M*.75+20,px=cx+Math.cos(s.a)*Rr,py=cy+Math.sin(s.a)*Rr,k=1+w*(1.5+s.s*4);x.strokeStyle=`rgba(255,255,255,${.35+.65*Math.abs(Math.sin(t*2*s.s+s.a))})`;x.lineWidth=.8+s.s*1.6;x.beginPath();x.moveTo(px,py);x.lineTo(cx+(px-cx)*k,cy+(py-cy)*k);x.stroke()});
+x.globalAlpha=1-cl(w*1.5);
+const pr=M*.28;g=x.createRadialGradient(W*.2+pr*.3,H*.82-pr*.3,pr*.1,W*.18,H*.85,pr);g.addColorStop(0,'#fff');g.addColorStop(.5,'#cdbbff');g.addColorStop(1,'#5a32b8');x.fillStyle=g;x.shadowColor='#4fc3f7';x.shadowBlur=40;x.beginPath();x.arc(W*.18,H*.85,pr,0,7);x.fill();x.shadowBlur=0;
+for(const s of[-1,1]){let p=[cx+s*R*1.25,cy];for(let i=0;i<6;i++){const sx=cx+s*(R*1.7+i*W*.075),sy=cy+Math.sin(i*2.1+s)*H*.13+H*.02,bw=W*.03+i%3*W*.01,bh=26+(i*37)%46;
+x.strokeStyle='rgba(185,163,245,.85)';x.lineWidth=2;x.beginPath();x.moveTo(p[0],p[1]);x.lineTo(sx,sy);x.stroke();const q=(t*.4+i*.2)%1;x.fillStyle='#fff';x.beginPath();x.arc(p[0]+(sx-p[0])*q,p[1]+(sy-p[1])*q,3,0,7);x.fill();
+x.fillStyle='rgba(244,241,255,.95)';x.fillRect(sx-bw/2,sy-bh/2,bw,bh);for(let j=0;j<4;j++){x.fillStyle=Math.sin(t*3+i*j+s)>0?'#4fc3f7':'#b9a3f5';x.fillRect(sx-bw/2+3,sy-bh/2+4+j*7,bw-6,3)}p=[sx,sy]}}
+x.globalAlpha=1;
+x.save();x.translate(cx+(Math.random()-.5)*w*8,cy+(Math.random()-.5)*w*8);x.scale(z,z);
+g=x.createRadialGradient(0,0,R*.8,0,0,R*2.3);g.addColorStop(0,`rgba(185,163,245,${.2+.6*act})`);g.addColorStop(.5,`rgba(79,195,247,${.1+.25*act})`);g.addColorStop(1,'rgba(79,195,247,0)');x.fillStyle=g;x.beginPath();x.arc(0,0,R*2.3,0,7);x.fill();
+for(let k=0;k<24;k++){x.strokeStyle=k%2?'#d7d2ec':'#fff';x.lineWidth=R*.16;x.beginPath();x.arc(0,0,R*1.08,k/24*6.2832+.02,(k+1)/24*6.2832-.02);x.stroke()}
+x.strokeStyle='#8f6df0';x.lineWidth=3;x.beginPath();x.arc(0,0,R*.98,0,7);x.stroke();
+x.setLineDash([6,10]);x.strokeStyle='rgba(255,255,255,.8)';x.lineWidth=1.5;x.beginPath();x.arc(0,0,R*1.3,0,7);x.stroke();x.setLineDash([]);
+for(let k=0;k<48;k++){const a=k/48*6.2832,b=act*(.4+.6*Math.sin(t*4-k*.3)**2);x.fillStyle=`rgba(79,195,247,${b})`;x.shadowColor='#4fc3f7';x.shadowBlur=10*act;x.beginPath();x.arc(Math.cos(a)*R*1.2,Math.sin(a)*R*1.2,2.5,0,7);x.fill()}x.shadowBlur=0;
+for(let i=0;i<3;i++){x.save();x.rotate(t*(i%2?-1:1)*(.3+act*.9));const c=['#b9a3f5','#4fc3f7','#fff'][i];x.strokeStyle=c;x.shadowColor=c;x.shadowBlur=6+20*act;x.lineWidth=5-i;x.setLineDash([R*.4,R*.15]);x.beginPath();x.arc(0,0,R*(.9-i*.04),0,7);x.stroke();x.restore()}
+x.save();x.beginPath();x.arc(0,0,R*.8,0,7);x.clip();g=x.createRadialGradient(0,0,0,0,0,R*.8);g.addColorStop(0,'#e8f9ff');g.addColorStop(.25,'#4fc3f7');g.addColorStop(.6,'#6d3fd6');g.addColorStop(1,'#1a0b4a');x.fillStyle=g;x.fillRect(-R,-R,R*2,R*2);
+for(let a=0;a<5;a++){x.strokeStyle=`rgba(255,255,255,${.3+act*.4})`;x.lineWidth=2.5;x.beginPath();for(let r=4;r<R*.8;r+=6){const an=a*1.2566+r*.025-t*(.6+act*1.8);r==4?x.moveTo(Math.cos(an)*r,Math.sin(an)*r):x.lineTo(Math.cos(an)*r,Math.sin(an)*r)}x.stroke()}
+for(let k=0;k<7;k++){const q=1-((t*.35+k/7)%1);x.strokeStyle=`rgba(255,255,255,${q*.5})`;x.lineWidth=1.5;x.beginPath();x.arc(0,0,R*.8*q,0,7);x.stroke()}
+g=x.createRadialGradient(0,0,0,0,0,R*(.1+w*1.2));g.addColorStop(0,'#fff');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(-R,-R,R*2,R*2);x.restore();
+x.textAlign='center';x.fillStyle='#fff';x.shadowColor='#b9a3f5';x.shadowBlur=25;x.font=`800 ${R*.28}px Tajawal,sans-serif`;x.fillText('AQX',0,-R*1.38);x.shadowBlur=8;x.font=`${R*.07}px Tajawal,sans-serif`;if('letterSpacing' in x)x.letterSpacing='3px';x.fillText('ALQURMANI X · BEYOND THE ORDINARY',0,-R*1.26);if('letterSpacing' in x)x.letterSpacing='0px';
+x.restore();
+x.fillStyle=`rgba(255,255,255,${cl((t-8.3)/1)})`;x.fillRect(0,0,W,H)};
+const cap=t=>{const i=t<2.4?0:t<5?1:t<8.4?2:3;if(i!=stg){stg=i;const e=$('#gst');e.style.opacity=0;setTimeout(()=>{e.textContent=C[0][i];e.style.opacity=1},250)}};
+const finish=()=>{if(fin)return;fin=true;if(mg){mg.gain.setTargetAtTime(0,A.currentTime,.6);setTimeout(()=>os.forEach(o=>{try{o.stop()}catch(e){}}),3000)}
+if(!ok()){const late=()=>{unlock();if(ok()){speak();['pointerdown','keydown','touchstart'].forEach(e=>removeEventListener(e,late))}};['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,late,{passive:true}))}
+$('#gate').classList.add('go');setTimeout(()=>$('#gate').remove(),1800)};
+const f=()=>{if(fin)return;const t=Math.min((performance.now()-t0)/1000*10/DUR,10);draw(t);cap(t);audio(t);$('#gp').style.width=t*10+'%';if(t>=10)return finish();requestAnimationFrame(f)};
+$('#gb').onclick=()=>{unlock();(A&&A.resume?A.resume():Promise.resolve()).then(()=>{if(ok())speak()}).catch(()=>{});finish()};
+f()})();
 </script>
 </body>
 </html>
