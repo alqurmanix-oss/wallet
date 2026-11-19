@@ -40,7 +40,7 @@ header small{display:none;opacity:.7;flex:1;font-size:.72rem;letter-spacing:.2em
 @media(min-width:700px){header small{display:block}}
 header .sp1{flex:1}
 @media(min-width:700px){header .sp1{display:none}}
-header a.b{padding:6px 12px;border-radius:20px;background:linear-gradient(135deg,#7a4df0,#4fc3f7);font-weight:700;font-size:.78rem;white-space:nowrap}
+header a.b{padding:6px 12px;border-radius:20px;background:linear-gradient(135deg,#7a4df0,#4fc3f7);font-weight:700;font-size:.78rem;white-space:nowrap;color:#fff}
 #vt{background:none;border:1px solid #b9a3f566;color:#fff;border-radius:50%;width:34px;height:34px;cursor:pointer;flex:none}
 #dock{position:fixed;top:var(--ht);inset-inline:0;z-index:4;display:flex;gap:8px;overflow-x:auto;padding:8px 12px;scrollbar-width:none;background:rgba(10,5,35,.45);backdrop-filter:blur(10px)}
 #dock::-webkit-scrollbar{display:none}
@@ -139,7 +139,7 @@ h2.t{font-size:clamp(1.6rem,4vw,2.6rem);margin:0 0 6px;text-shadow:0 0 24px #7a4
 #wl{position:absolute;bottom:calc(10px + env(safe-area-inset-bottom,0px));inset-inline:0;display:flex;gap:8px;overflow-x:auto;padding:4px 12px;pointer-events:auto;scrollbar-width:none}
 .wb{flex:none;padding:8px 14px;border-radius:20px;border:1px solid var(--v);background:rgba(20,10,60,.7);backdrop-filter:blur(8px);color:#fff;font-weight:700;font-size:.82rem;cursor:pointer}
 .wb:hover{background:#7a4df0}
-/* الرئيسية */
+/* الرئيسية (أساس) */
 #p-home{background:linear-gradient(180deg,#fff,#f1ebff 35%,#e6f6ff 70%,#f5efff);color:var(--ink);padding:0}
 .aur{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
 #p-home .aur{position:absolute}
@@ -160,9 +160,7 @@ h2.t{font-size:clamp(1.6rem,4vw,2.6rem);margin:0 0 6px;text-shadow:0 0 24px #7a4
 @keyframes hue{to{background-position:300% 0}}@keyframes flt{50%{transform:translateY(-8px)}}
 .hero h2{font-size:clamp(1.3rem,3.4vw,2.2rem);margin:8px 0 14px}.hero p{line-height:1.9;max-width:34em}
 .live{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;padding:30px 6vw}
-.ob{width:130px;height:130px;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle at 30% 25%,#fff,#efe6ff 60%,#d9f2ff);border:1px solid var(--v);box-shadow:0 10px 30px #7a4df03a;animation:bb 5s ease-in-out infinite}
-.ob:nth-child(2n){animation-delay:-2s}.ob:nth-child(3n){animation-delay:-3.5s}@keyframes bb{50%{transform:translateY(-12px)}}
-.ob b{font-size:1.9rem;color:var(--p)}.ob span{font-size:.78rem}
+@keyframes bb{50%{transform:translateY(-12px)}}
 .cta{text-align:center;margin:30px 4vw;padding:60px 20px;border-radius:40px;background:linear-gradient(160deg,#f4efff,#dff3ff);border:1px solid #d9ccff;box-shadow:0 20px 60px #7a4df02a}
 .cta h2{font-size:clamp(1.8rem,5vw,3.2rem);margin:10px 0;color:var(--p)}.cta p{max-width:36em;margin:10px auto 24px;line-height:1.9}
 .hf{margin-top:30px;padding:50px 6vw 0;background:linear-gradient(#ffffff00,#e9deff 45%,#d4c4ff)}
@@ -183,6 +181,52 @@ h2.t{font-size:clamp(1.6rem,4vw,2.6rem);margin:0 0 6px;text-shadow:0 0 24px #7a4
 #gb{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));inset-inline-end:16px;background:rgba(255,255,255,.18);border:1px solid #fff8;color:#fff;border-radius:30px;padding:8px 16px;cursor:pointer}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
 </style>
+<style id="home-v2">
+/* ===== الرئيسية v2: هيدر وتبويبات وشرائط فاتحة ===== */
+body.hm{background:#f6f1ff}
+body.hm header{background:rgba(255,255,255,.78);border-bottom:1px solid #e3d8ff;box-shadow:0 8px 30px #7a4df01f;color:var(--ink)}
+body.hm .logo{background:linear-gradient(90deg,#7a4df0,#4fc3f7,#d4a94f,#7a4df0);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;animation:hue 8s linear infinite}
+body.hm header small{color:#6a5a99;opacity:1}
+body.hm #vt{background:#fff;color:var(--ink);border-color:#cdbcff}
+body.hm #dock{background:rgba(255,255,255,.62);border-bottom:1px solid #e3d8ff}
+body.hm #dock a{background:#fff;color:var(--ink);border-color:#d9ccff}
+body.hm #dock a.on,body.hm #dock a:hover{background:linear-gradient(135deg,#7a4df0,#4fc3f7);color:#fff;border-color:transparent}
+body.hm #st{background:rgba(255,255,255,.9);color:var(--ink);box-shadow:0 -8px 30px #7a4df01f}
+body.hm .bar,body.hm #st footer{border-top:1px solid #e3d8ff}
+body.hm #st footer{opacity:1;color:#5a4a8a}
+body.hm .up{color:#0a8a4a}body.hm .dn{color:#c62828}
+/* الخلفية والإضاءة التفاعلية */
+#p-home{background:linear-gradient(180deg,#fff,#f4eeff 30%,#e9f7ff 62%,#fff4fa)}
+#p-home .aur{position:fixed;z-index:0}
+#p-home::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(420px at var(--mx,50%) var(--my,30%),#ffffffb0,transparent 70%)}
+#p-home .hero,#p-home .live,#p-home .cta,#p-home .hf,.mq2,.hs3{position:relative;z-index:1}
+.glass{background:rgba(255,255,255,.72);border:1px solid #e3d8ff;backdrop-filter:blur(10px);box-shadow:0 10px 30px #7a4df01f}
+.gr{display:inline-flex;flex-wrap:wrap;gap:10px;align-items:center;padding:8px 18px;border-radius:30px;font-size:.9rem;margin-bottom:12px}
+.fg2{font-size:1.5rem}.gr small{opacity:.7}
+.hp2{padding:16px 20px;border-radius:22px;line-height:1.9;max-width:36em}
+.hb{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+@media(max-width:800px){.hb{justify-content:center}}
+.btn.gd{background:linear-gradient(135deg,#d4a94f,#f5d98a);color:#3b2a05;box-shadow:0 8px 22px #d4a94f66}
+#scene{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s}
+#scene .core{cursor:pointer;background:radial-gradient(circle at 35% 30%,#fff,#e6dcff 35%,#9a6bff 75%,#d4a94f 130%)}
+#scene .rg{border-color:#d4a94f99}#scene .rg.b{border-color:#4fc3f799}
+.wd{cursor:pointer;box-shadow:0 8px 24px #7a4df066,0 0 0 4px #ffffffaa}
+.wd::after{content:attr(data-l);position:absolute;top:112%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:12px;background:#fff;color:var(--ink);box-shadow:0 4px 14px #7a4df044;opacity:0;transition:.2s;pointer-events:none}
+.wd:hover::after{opacity:1}
+.mq2{overflow:hidden;white-space:nowrap;margin:10px 0;background:rgba(255,255,255,.6);border-block:1px solid #e3d8ff}
+.mq2 span{font-weight:700;color:var(--p)}.mq2 i{color:#d4a94f;font-style:normal}
+.sr{width:150px;text-align:center;padding:16px 10px;border-radius:26px;background:rgba(255,255,255,.78);border:1px solid #e3d8ff;box-shadow:0 12px 34px #7a4df02e;backdrop-filter:blur(8px);animation:bb 5s ease-in-out infinite}
+.sr:nth-child(2n){animation-delay:-2s}.sr:nth-child(3n){animation-delay:-3.5s}
+.sr i{display:grid;place-items:center;width:96px;height:96px;margin:0 auto 8px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--q,0)*1%),#ece4ff 0)}
+.sr i b{width:74px;height:74px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:1.5rem;color:var(--p)}
+.sr span{font-size:.8rem}.lv{align-self:center;font-size:.8rem}
+.hs3{padding:20px 6vw 10px;text-align:center}.hs3 h3{font-size:clamp(1.4rem,3.5vw,2rem);margin:0 0 18px;color:var(--p)}
+.hsg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.hsg div{padding:22px;border-radius:26px;background:rgba(255,255,255,.75);border:1px solid #e3d8ff;box-shadow:0 12px 34px #7a4df01f}
+.hsg b{font-size:2.6rem;background:linear-gradient(135deg,#d4a94f,#7a4df0);-webkit-background-clip:text;background-clip:text;color:transparent}.hsg h4{margin:4px 0}
+#p-home .cta{border:2px solid transparent;background:linear-gradient(160deg,#f8f4ff,#e4f5ff) padding-box,linear-gradient(135deg,#d4a94f,#b9a3f5,#4fc3f7) border-box}
+#p-home .fb{background:linear-gradient(90deg,#7a4df0,#4fc3f7)}
+</style>
 </head>
 <body class="hm">
 
@@ -197,37 +241,40 @@ h2.t{font-size:clamp(1.6rem,4vw,2.6rem);margin:0 0 6px;text-shadow:0 0 24px #7a4
 <nav id="dock" aria-label="الأقسام"></nav>
 
 <main id="app">
-  <section class="tab on" id="p-home">
-    <div class="aur"><i class="bl"></i><i class="bl"></i><i class="bl"></i></div>
-    <div class="hero">
-      <div class="scene" id="scene"><i class="rg b"></i><i class="rg"></i><div class="core">AQX</div></div>
-      <div>
-        <h1>القرماني إكس AQX</h1>
-        <h2>عالم رقمي واحد.. إمكانات بلا حدود.</h2>
-        <p>اكتشف القرماني إكس AQX، منظومة متكاملة تجمع التكنولوجيا والأعمال والتجارة والخدمات والمشروعات في عالم واحد، لتفتح أمامك آفاقًا جديدة من الفرص والإمكانات.</p>
-        <a class="btn" href="#eco">اكتشف منظومة AQX</a> <a class="btn o" href="signup.html">ابدأ رحلتك الآن</a>
-      </div>
+<section class="tab on" id="p-home">
+  <div class="aur"><i class="bl"></i><i class="bl"></i><i class="bl"></i></div>
+  <div class="hero">
+    <div class="hc">
+      <div class="gr glass" id="h-greet"></div>
+      <h1>القرماني إكس AQX</h1>
+      <h2 id="h-tag">عالم رقمي واحد.. إمكانات بلا حدود.</h2>
+      <p class="glass hp2" id="h-desc">اكتشف القرماني إكس AQX، منظومة متكاملة تجمع التكنولوجيا والأعمال والتجارة والخدمات والمشروعات في عالم واحد، لتفتح أمامك آفاقًا جديدة من الفرص والإمكانات.</p>
+      <div class="hb"><a class="btn" id="h-b1" href="#eco">اكتشف منظومة AQX</a><a class="btn o" id="h-b2" href="signup.html">ابدأ رحلتك الآن</a><button class="btn gd" id="h-tour">🎧 جولة صوتية</button></div>
     </div>
-    <div class="live" id="live"></div>
-    <section class="cta">
-      <div class="core" style="position:relative;inset:auto;width:90px;height:90px;margin:auto;font-size:1.4rem">AQX</div>
-      <h2>رحلتك مع AQX تبدأ من هنا.</h2>
-      <p>انضم إلى منظومة متكاملة من المنصات والخدمات والمشروعات والفرص، واكتشف عالمًا جديدًا من الإمكانات.</p>
-      <a class="btn" href="signup.html">افتح حسابك في AQX</a> <a class="btn o" href="#eco">استكشف المنظومة</a> <a class="btn o" href="#contact">تواصل معنا</a>
-    </section>
-    <footer class="hf">
-      <div class="fc">
-        <div><h3>القرماني إكس AQX</h3><b>منظومة متكاملة تصنع فرص المستقبل</b><p style="line-height:1.8">القرماني إكس AQX منظومة متكاملة تجمع عوالم التكنولوجيا والأعمال والتجارة والخدمات والمشروعات، وتعمل على بناء بيئة مترابطة تفتح آفاقًا جديدة للابتكار والنمو والاستثمار، وتصنع فرصًا حقيقية للأفراد والشركات والمؤسسات.</p></div>
-        <div><h3>تواصل مع AQX</h3><div class="soc" id="soc"></div><p>✉️ <a href="contact.html">راسلنا</a><br>📍 مصر، أسوان<br><a href="https://www.google.com/maps/search/?api=1&query=Aswan,Egypt" target="_blank" rel="noopener noreferrer">🗺️ افتح الخريطة</a></p><a class="wa" href="https://wa.me/?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20AQX%20%F0%9F%92%9C" target="_blank" rel="noopener noreferrer">💬 راسلنا على واتساب</a></div>
-        <div><h3>النشرة البريدية</h3><p>ابقَ على اتصال مع AQX. تابع الجديد والإعلانات والفرص والعروض عبر بريدك.</p>
-          <form id="nf" novalidate><input class="in" type="email" name="e" required maxlength="120" placeholder="بريدك الإلكتروني" autocomplete="email"><input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn">اشترك</button></form></div>
-        <div><h3>رأيك يصنع الفرق</h3><ul id="fbk"></ul></div>
-        <div><h3>تفضيلاتك</h3><ul id="prf"></ul></div>
-      </div>
-      <div class="fb"><span>© <span id="yr"></span> ALQURMANI X AQX — جميع الحقوق محفوظة</span><span>إصدار الموقع: AQX Web</span><span>🟢 يعمل · <a href="status.html">آخر تحديث</a></span></div>
-    </footer>
+    <div class="scene" id="scene"><i class="rg b"></i><i class="rg"></i><div class="core">AQX</div></div>
+  </div>
+  <div class="mq2"><div class="tr" id="h-mq"></div></div>
+  <div class="live" id="live"></div>
+  <section class="hs3"><h3 id="h-sh">ابدأ في ثلاث خطوات</h3><div class="hsg" id="h-s"></div></section>
+  <section class="cta">
+    <div class="core" style="position:relative;inset:auto;width:90px;height:90px;margin:auto;font-size:1.4rem">AQX</div>
+    <h2 id="h-ct">رحلتك مع AQX تبدأ من هنا.</h2>
+    <p id="h-cd">انضم إلى منظومة متكاملة من المنصات والخدمات والمشروعات والفرص، واكتشف عالمًا جديدًا من الإمكانات.</p>
+    <a class="btn" id="h-c1" href="signup.html">افتح حسابك في AQX</a> <a class="btn o" id="h-c2" href="#eco">استكشف المنظومة</a> <a class="btn o" id="h-c3" href="#contact">تواصل معنا</a>
   </section>
-  <section class="tab" id="p-eco"><div id="ht"></div><div id="wl"></div></section>
+  <footer class="hf">
+    <div class="fc">
+      <div><h3>القرماني إكس AQX</h3><b>منظومة متكاملة تصنع فرص المستقبل</b><p style="line-height:1.8">القرماني إكس AQX منظومة متكاملة تجمع عوالم التكنولوجيا والأعمال والتجارة والخدمات والمشروعات، وتعمل على بناء بيئة مترابطة تفتح آفاقًا جديدة للابتكار والنمو والاستثمار، وتصنع فرصًا حقيقية للأفراد والشركات والمؤسسات.</p></div>
+      <div><h3>تواصل مع AQX</h3><div class="soc" id="soc"></div><p>✉️ <a href="contact.html">راسلنا</a><br>📍 مصر، أسوان<br><a href="https://www.google.com/maps/search/?api=1&query=Aswan,Egypt" target="_blank" rel="noopener noreferrer">🗺️ افتح الخريطة</a></p><a class="wa" href="https://wa.me/?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20AQX%20%F0%9F%92%9C" target="_blank" rel="noopener noreferrer">💬 راسلنا على واتساب</a></div>
+      <div><h3>النشرة البريدية</h3><p>ابقَ على اتصال مع AQX. تابع الجديد والإعلانات والفرص والعروض عبر بريدك.</p>
+        <form id="nf" novalidate><input class="in" type="email" name="e" required maxlength="120" placeholder="بريدك الإلكتروني" autocomplete="email"><input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn">اشترك</button></form></div>
+      <div><h3>رأيك يصنع الفرق</h3><ul id="fbk"></ul></div>
+      <div><h3>تفضيلاتك</h3><ul id="prf"></ul></div>
+    </div>
+    <div class="fb"><span>© <span id="yr"></span> ALQURMANI X AQX — جميع الحقوق محفوظة</span><span>إصدار الموقع: AQX Web</span><span>🟢 يعمل · <a href="status.html">آخر تحديث</a></span></div>
+  </footer>
+</section>
+<section class="tab" id="p-eco"><div id="ht"></div><div id="wl"></div></section>
 </main>
 <noscript><div style="position:fixed;inset:0;z-index:200;background:#fff;color:#241447;padding:24px;overflow:auto"><h1>القرماني إكس AQX</h1><p>منظومة متكاملة تجمع التكنولوجيا والأعمال والتجارة والخدمات والمشروعات. مصر، أسوان. فعّل JavaScript لعرض التجربة الكاملة.</p></div></noscript>
 
@@ -271,22 +318,22 @@ const setV=()=>{$('#vt').textContent=vOn?'🔊':'🔇'};setV();
 const speak=(t,w)=>{
   if(!window.speechSynthesis||(!vOn&&!w))return;let d=0;
   const go=()=>{if(d)return;d=1;
-    const lg=AR?'ar-EG':'en-US',u=new SpeechSynthesisUtterance(t);u.lang=lg;
+    const lg=window.VLG||(AR?'ar-EG':'en-US'),u=new SpeechSynthesisUtterance(t);u.lang=lg;
     const vs=speechSynthesis.getVoices(),n=x=>x.lang.replace('_','-').toLowerCase(),
-    pool=vs.filter(v=>n(v)==lg.toLowerCase()).concat(vs.filter(v=>n(v).slice(0,2)==lg.slice(0,2))),
+    pool=vs.filter(v=>n(v)==lg.toLowerCase()).concat(vs.filter(v=>n(v).slice(0,2)==lg.slice(0,2).toLowerCase())),
     bad=/\bmale\b|shakir|naayf|hamed|ahmed|david|mark|george|guy/i,good=/female|salma|hoda|laila|zira|hazel|samantha|aria|jenny|natural|google/i;
     u.voice=pool.find(v=>v.name==vName)||pool.find(v=>good.test(v.name)&&!bad.test(v.name))||pool.find(v=>!bad.test(v.name))||pool[0]||null;
     u.pitch=1.12;u.rate=vRate;if(w==1)u.onerror=e=>{if(e.error=='not-allowed')spoke=0};
     speechSynthesis.cancel();speechSynthesis.speak(u)};
   if(speechSynthesis.getVoices().length||speak.n)go();else{speak.n=1;speechSynthesis.onvoiceschanged=go;setTimeout(go,700)}
 };
-const WEL=AR?'أهلاً بيك في القرماني إكس. عالم رقمي واحد، وإمكانات بلا حدود.'+(cn?' ومرحبًا بزوارنا الكرام من '+cn+'.':''):'Welcome to Alqurmani X. One digital world, with limitless possibilities.'+(cn?' Greetings to our visitors from '+cn+'.':'');
+let WEL=AR?'أهلاً بيك في القرماني إكس. عالم رقمي واحد، وإمكانات بلا حدود.'+(cn?' ومرحبًا بزوارنا الكرام من '+cn+'.':''):'Welcome to Alqurmani X. One digital world, with limitless possibilities.'+(cn?' Greetings to our visitors from '+cn+'.':'');
 const welcome=()=>{if(spoke)return;spoke=1;speak(WEL,1)};
 ['pointerdown','keydown','touchstart','wheel'].forEach(e=>addEventListener(e,()=>{if(!spoke)welcome()},{passive:true}));setTimeout(welcome,200);
 $('#vt').onclick=()=>{vOn=!vOn;setV();svV();if(!vOn&&window.speechSynthesis)speechSynthesis.cancel()};
 document.addEventListener('click',e=>{
   const el=e.target.closest('a,button,summary,[data-say]');if(!el)return;tone(660);
-  if(!vOn||$('#gate')||['vt','up','px'].includes(el.id))return;
+  if(!vOn||$('#gate')||['vt','up','px','h-tour'].includes(el.id))return;
   const t=(el.dataset.say||el.getAttribute('aria-label')||el.textContent||'').replace(/[\u{1F000}-\u{1FFFF}\u2600-\u27BF\uFE0F\u200d★☆]/gu,'').replace(/\s+/g,' ').trim().slice(0,48);
   if(t)speak((AR?'تمام.. ':'')+t);
 });
@@ -396,10 +443,8 @@ document.addEventListener('submit',e=>{e.preventDefault();const f=e.target;if(f.
     if(!rate()){$('#cr').textContent=T('انتظر لحظات قبل الإرسال مرة أخرى.','Please wait a moment.');return}
     $('#cr').textContent=T('تم الاستلام. الرقم المرجعي: ','Received. Reference: ')+'AQX-'+Date.now().toString(36).toUpperCase()+T(' (اربط النموذج بالخادم لإرسال فعلي)','')}});
 
-/* ================= الرئيسية ================= */
-const STATS=[['منصة نشطة',3],['خدمة متاحة',40],['منتج في المتجر',120],['مشروع قائم',4],['زائر الآن',1]]; // قيم تجريبية — اربطها بأرقام النظام
-$('#live').innerHTML=STATS.map(s=>`<div class="ob"><b data-n="${s[1]}">0</b><span>${s[0]}</span></div>`).join('')+'<div style="align-self:center;font-size:.8rem">🔴 LIVE · أرقام تجريبية</div>';
-const count=()=>$$('[data-n]').forEach(e=>{const n=+e.dataset.n,t=performance.now(),u=()=>{const k=cl((performance.now()-t)/2500);e.textContent=Math.round(n*k);if(k<1)requestAnimationFrame(u)};u()});
+/* ================= الرئيسية (عناصر مشتركة) ================= */
+let count=()=>{}; // تُستبدل بحلقات الإحصائيات في سكريبت الرئيسية v2
 for(let i=0;i<40;i++){const s=document.createElement('i');s.className='sp';s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s`;$('#p-home .aur').append(s)}
 const WI=['💰','🏥','💻','💼','📦','🌱'].map(e=>{const d=document.createElement('div');d.className='wd';d.textContent=e;$('#scene').append(d);return d});
 $('#soc').innerHTML=[['W','#25D366','https://wa.me/'],['f','#1877F2','https://facebook.com/'],['✈','#229ED9','https://t.me/'],['X','#111','https://x.com/'],['▶','#F00','https://youtube.com/'],['◎','linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)','https://instagram.com/']].map(s=>`<a href="${s[2]}" target="_blank" rel="noopener noreferrer" style="background:${s[1]}">${s[0]}</a>`).join('')+'<a href="contact.html" style="background:#7a4df0">✉</a>';
@@ -520,6 +565,46 @@ const loop=n=>{
 };
 show(location.hash.slice(1)||'home');requestAnimationFrame(loop);
 setTimeout(meas,300);
+</script>
+
+<!-- ===================== تحديث الرئيسية v2 (سكريبت الرئيسية فقط) ===================== -->
+<script>
+(()=>{
+const HL=AR?'ar':(L||'en').slice(0,2).toLowerCase(),Z=['ar','en','fr','es'].includes(HL)?HL:'en',h=id=>$('#'+id);
+const X={
+ar:{g:['صباح الخير','نهارك سعيد','مساء الخير'],tag:'عالم رقمي واحد.. إمكانات بلا حدود.',desc:'اكتشف القرماني إكس AQX، منظومة متكاملة تجمع التكنولوجيا والأعمال والتجارة والخدمات والمشروعات في عالم واحد، لتفتح أمامك آفاقًا جديدة من الفرص والإمكانات.',b1:'اكتشف منظومة AQX',b2:'ابدأ رحلتك الآن',tr:'🎧 جولة صوتية',st:['منصة نشطة','خدمة متاحة','منتج في المتجر','مشروع قائم','زائر الآن'],sh:'ابدأ في ثلاث خطوات',s:[['اكتشف','تعرّف على عوالم المنظومة ومنصاتها.'],['انضم','افتح حسابك الموحد في AQX.'],['انطلق','استفد من الخدمات والفرص والمشروعات.']],ct:'رحلتك مع AQX تبدأ من هنا.',cd:'انضم إلى منظومة متكاملة من المنصات والخدمات والمشروعات والفرص، واكتشف عالمًا جديدًا من الإمكانات.',c1:'افتح حسابك في AQX',c2:'استكشف المنظومة',c3:'تواصل معنا',w:'أهلاً بيك في القرماني إكس. عالم رقمي واحد، وإمكانات بلا حدود.',cp:' ومرحبًا بزوارنا الكرام من ',vl:'ar-EG'},
+en:{g:['Good morning','Good afternoon','Good evening'],tag:'One digital world.. limitless possibilities.',desc:'Discover Alqurmani X AQX, an integrated ecosystem uniting technology, business, trade, services and projects in one world, opening new horizons of opportunity.',b1:'Discover the AQX ecosystem',b2:'Start your journey',tr:'🎧 Voice tour',st:['Active platforms','Available services','Store products','Running projects','Visitors now'],sh:'Start in three steps',s:[['Discover','Explore the ecosystem and its platforms.'],['Join','Open your unified AQX account.'],['Launch','Use the services, opportunities and projects.']],ct:'Your AQX journey starts here.',cd:'Join an integrated ecosystem of platforms, services, projects and opportunities, and discover a new world of possibilities.',c1:'Open your AQX account',c2:'Explore the ecosystem',c3:'Contact us',w:'Welcome to Alqurmani X. One digital world, with limitless possibilities.',cp:' Greetings to our visitors from ',vl:/^en-/i.test(L)?L:'en-US'},
+fr:{g:['Bonjour','Bon après-midi','Bonsoir'],tag:'Un seul monde numérique.. des possibilités sans limites.',desc:'Découvrez Alqurmani X AQX, un écosystème intégré réunissant technologie, affaires, commerce, services et projets dans un seul monde.',b1:'Découvrir AQX',b2:'Commencer',tr:'🎧 Visite vocale',st:['Plateformes actives','Services disponibles','Produits en boutique','Projets en cours','Visiteurs maintenant'],sh:'Commencez en trois étapes',s:[['Découvrez','Explorez l’écosystème et ses plateformes.'],['Rejoignez','Ouvrez votre compte AQX unifié.'],['Lancez-vous','Profitez des services et des opportunités.']],ct:'Votre voyage avec AQX commence ici.',cd:'Rejoignez un écosystème de plateformes, services, projets et opportunités.',c1:'Ouvrir un compte AQX',c2:'Explorer l’écosystème',c3:'Nous contacter',w:'Bienvenue chez Alqurmani X. Un seul monde numérique, des possibilités sans limites.',cp:' Salutations à nos visiteurs de ',vl:'fr-FR'},
+es:{g:['Buenos días','Buenas tardes','Buenas noches'],tag:'Un mundo digital.. posibilidades sin límites.',desc:'Descubre Alqurmani X AQX, un ecosistema integrado que une tecnología, negocios, comercio, servicios y proyectos en un solo mundo.',b1:'Descubrir AQX',b2:'Empieza ahora',tr:'🎧 Tour de voz',st:['Plataformas activas','Servicios disponibles','Productos en tienda','Proyectos en marcha','Visitantes ahora'],sh:'Empieza en tres pasos',s:[['Descubre','Explora el ecosistema y sus plataformas.'],['Únete','Abre tu cuenta AQX unificada.'],['Despega','Aprovecha servicios y oportunidades.']],ct:'Tu viaje con AQX empieza aquí.',cd:'Únete a un ecosistema de plataformas, servicios, proyectos y oportunidades.',c1:'Abrir cuenta AQX',c2:'Explorar el ecosistema',c3:'Contáctanos',w:'Bienvenido a Alqurmani X. Un solo mundo digital, posibilidades sin límites.',cp:' Saludos a nuestros visitantes de ',vl:'es-ES'}
+},D=X[Z];
+const set=(id,t)=>{h(id).textContent=t};
+set('h-tag',D.tag);set('h-desc',D.desc);set('h-b1',D.b1);set('h-b2',D.b2);set('h-tour',D.tr);set('h-sh',D.sh);set('h-ct',D.ct);set('h-cd',D.cd);set('h-c1',D.c1);set('h-c2',D.c2);set('h-c3',D.c3);
+h('h-s').innerHTML=D.s.map((x,i)=>`<div><b>0${i+1}</b><h4>${esc(x[0])}</h4><p>${esc(x[1])}</p></div>`).join('');
+/* الصوت: لغة ودولة الزائر */
+window.VLG=D.vl;WEL=D.w+(cn?D.cp+cn+'.':'');
+/* تحية حسب الوقت + علم ودولة الزائر */
+const gt=()=>{let hr=12;try{hr=+new Intl.DateTimeFormat('en-GB',{hour:'numeric',hourCycle:'h23',timeZone:TZ||undefined}).format(new Date())}catch(e){}
+  h('h-greet').innerHTML=`<span class="fg2">${FLAG}</span><b>${esc(D.g[hr<12?0:hr<17?1:2])}${cn?' · '+esc(cn):''}</b><span>${esc(fmt({timeStyle:'short'}))}</span><small>${esc(cur)}</small>`};
+gt();setInterval(gt,20000);
+/* شريط أسماء المنظومات */
+h('h-mq').innerHTML=(P.map(p=>`<span>${p[0]} ${esc(AR?p[1]:p[2])}</span>`).join('<i> ✦ </i>')+'<i> ✦ </i>').repeat(4);
+/* الإحصائيات: حلقات (قيم تجريبية — اربطها بأرقام النظام) */
+const SV=[[3,10],[40,100],[120,200],[4,10],[1,50]],COL=['#7a4df0','#4fc3f7','#ff7aa8','#d4a94f','#5de0a8'];
+$('#live').innerHTML=SV.map((s,i)=>`<div class="sr" style="--c:${COL[i]}"><i><b>0</b></i><span>${esc(D.st[i])}</span></div>`).join('')+`<div class="lv">🔴 LIVE · ${T('أرقام تجريبية','sample numbers')}</div>`;
+const rings=()=>$$('.sr').forEach((e,i)=>{const b=e.querySelector('b'),r=e.querySelector('i'),n=SV[i][0],q=Math.max(8,n/SV[i][1]*100),t=performance.now(),u=()=>{const k=cl((performance.now()-t)/2200);b.textContent=Math.round(n*k);r.style.setProperty('--q',q*k);if(k<1)requestAnimationFrame(u)};u()});
+count=rings;rings();
+/* تفاعل الكرة والإضاءة */
+const hp=$('#p-home'),sc2=$('#scene');
+hp.addEventListener('pointermove',e=>{const r=sc2.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;sc2.style.setProperty('--ry',x*16+'deg');sc2.style.setProperty('--rx',-y*16+'deg');hp.style.setProperty('--mx',e.clientX+'px');hp.style.setProperty('--my',e.clientY+'px')});
+WI.forEach((d,i)=>{d.dataset.l=AR?P[i][1]:P[i][2];d.onclick=()=>{location.hash='eco'}});
+$('#scene .core').onclick=()=>speak(WEL,2);
+/* جولة صوتية أنثوية بلغة الزائر */
+const voice=t=>{const u=new SpeechSynthesisUtterance(t),lg=D.vl,vs=speechSynthesis.getVoices(),n=v=>v.lang.replace('_','-').toLowerCase(),pool=vs.filter(v=>n(v)==lg.toLowerCase()).concat(vs.filter(v=>n(v).slice(0,2)==lg.slice(0,2).toLowerCase())),bad=/\bmale\b|shakir|naayf|hamed|ahmed|david|mark|george|guy/i,good=/female|salma|hoda|laila|zira|hazel|samantha|aria|jenny|natural|google/i;u.lang=lg;u.voice=pool.find(v=>v.name==vName)||pool.find(v=>good.test(v.name)&&!bad.test(v.name))||pool.find(v=>!bad.test(v.name))||pool[0]||null;u.pitch=1.12;u.rate=vRate;return u};
+let touring=0;const end=()=>{touring=0;set('h-tour',D.tr)};
+h('h-tour').onclick=e=>{e.stopPropagation();tone(660);if(!window.speechSynthesis)return;if(touring){speechSynthesis.cancel();end();return}
+  touring=1;set('h-tour','⏹');speechSynthesis.cancel();const ln=[WEL,D.tag+'. '+D.desc,D.ct+' '+D.cd];
+  ln.forEach((t,i)=>{const u=voice(t);if(i==ln.length-1)u.onend=end;u.onerror=end;speechSynthesis.speak(u)})};
+})();
 </script>
 </body>
 </html>
