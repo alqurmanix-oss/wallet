@@ -73,17 +73,7 @@ button{font:inherit}
 <div class="notice">تنبيه أمني: هذه واجهة التصميم الأولية. لا تنفّذ حاليًا أي إيداع أو سحب أو تحويل، ولا تعرض أرصدة أو سجلات مالية فعلية قبل توصيل خدمات المحفظة والتحقق من صلاحياتها.</div>
 <footer class="footer"><span>© AQX — جميع الحقوق محفوظة</span><span>AQX Universal Wallet · Secure Financial Space</span></footer>
 </main>
-<script src="wallet-security.js"></script>
 <script>
-const token=sessionStorage.getItem("aqx_wallet_access_token");
-if(!token){location.replace("login.html")}
-else{
- aqxWalletApi("validate_session",{},token).catch(()=>{sessionStorage.removeItem("aqx_wallet_access_token");location.replace("login.html")});
-}
-document.getElementById("exit").addEventListener("click",async()=>{
- try{if(token)await aqxWalletApi("logout",{},token)}catch{}
- sessionStorage.removeItem("aqx_wallet_access_token");
- location.replace("login.html");
-});
+document.getElementById("exit").addEventListener("click",()=>{location.href="login.html"});
 </script>
 </body></html>
