@@ -35,15 +35,13 @@ async function aqxWalletApi(action, payload = {}, walletToken = "") {
 function aqxWalletError(code) {
   const messages = {
     aqx_account_session_required: "افتح المحفظة من داخل حساب AQX بعد تسجيل الدخول.",
-    email_not_verified: "يجب تفعيل البريد الإلكتروني في حساب AQX أولًا.",
-    phone_not_verified: "يجب تفعيل رقم الهاتف في حساب AQX أولًا.",
     wallet_unavailable: "المحفظة غير متاحة حاليًا. تواصل مع دعم AQX.",
     wallet_password_already_set: "تم إنشاء كلمة مرور المحفظة بالفعل. انتقل إلى صفحة الدخول.",
     wallet_password_not_set: "لم يتم إنشاء كلمة مرور المحفظة بعد.",
     bot_check_failed: "تحقق البوتات غير صحيح أو انتهت صلاحيته. أعد المحاولة.",
     invalid_password: "كلمة المرور غير صحيحة.",
     temporarily_locked: "تم إيقاف محاولات الدخول مؤقتًا لحماية المحفظة.",
-    password_policy_or_confirmation_failed: "تأكد من تطابق كلمتي المرور وأن تكون كلمة المرور 12 حرفًا على الأقل.",
+    password_policy_or_confirmation_failed: "كلمة المرور يجب أن تكون 12 حرفًا على الأقل، وتحتوي على حرف صغير وحرف كبير ورقم ورمز خاص، مع تطابق التأكيد.",
     security_service_unavailable: "خدمة الحماية غير متاحة مؤقتًا. حاول لاحقًا."
   };
   return messages[code] || "تعذر إكمال العملية. حاول مرة أخرى.";
