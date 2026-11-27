@@ -13,6 +13,21 @@
 
 /* Stable compact layout */
 html{min-height:100%;background:#080b12}body{display:flex;align-items:center;justify-content:center;min-height:100vh;min-height:100svh;padding:12px 14px;overflow-x:hidden}.panel{width:min(100%,440px);margin:auto;padding:clamp(16px,4vw,25px)}.lock{margin:7px 0;font-size:32px}.hint{margin:0 0 12px;font-size:12.5px;line-height:1.75}label{margin:11px 0 5px}input{min-height:46px;padding:10px 12px}.challenge{min-height:46px;display:flex;align-items:center;justify-content:center}.msg{min-height:42px;margin-top:8px}@media(max-height:650px){body{align-items:flex-start;padding-top:8px;padding-bottom:8px}.panel{padding:14px 17px}.lock{margin:2px 0;font-size:26px}.hint{margin-bottom:7px}label{margin-top:7px}input{min-height:41px}.challenge{min-height:38px}button{margin-top:9px;min-height:42px}.msg{min-height:28px}}
+
+/* Fixed viewport: no page drift, horizontal pan, or vertical scroll */
+html,body{width:100%;height:100%;min-height:0;margin:0;overflow:hidden;overscroll-behavior:none;touch-action:pan-y}
+body{position:fixed;inset:0;display:grid;place-items:center;padding:8px;box-sizing:border-box}
+.panel{position:relative;width:min(100%,430px);max-height:calc(100% - 16px);margin:0;padding:clamp(12px,2.2vh,20px);overflow:hidden;transform:none}
+.panel *{min-width:0}
+h2{margin:0 0 4px;font-size:clamp(17px,4.6vw,21px);line-height:1.35}
+.lock{margin:3px 0;font-size:27px;line-height:1.2}
+.hint{margin:0 0 7px;font-size:11.5px;line-height:1.55}
+label{margin:7px 0 4px;font-size:12px}
+input{height:42px;min-height:42px;padding:7px 10px;font-size:14px}
+.challenge{height:38px;min-height:38px;margin:4px 0 6px;padding:5px 8px}
+button{height:43px;min-height:43px;margin-top:9px;padding:7px 12px}
+.msg{height:30px;min-height:30px;margin-top:5px;font-size:11px;line-height:1.4;overflow:hidden}
+@media(max-height:560px){.panel{padding:8px 12px}.brand{font-size:11px}.lock{font-size:21px;margin:1px 0}h2{font-size:16px}.hint{font-size:10px;line-height:1.35;margin-bottom:4px}label{margin:4px 0 2px}input{height:35px;min-height:35px;padding:5px 8px}.challenge{height:31px;min-height:31px}button{height:36px;min-height:36px;margin-top:5px}.msg{height:23px;min-height:23px}}
 </style>
 </head>
 <body>
