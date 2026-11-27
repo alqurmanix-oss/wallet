@@ -46,7 +46,7 @@ $("form").addEventListener("submit",async e=>{
  try{
   if($("password").value!==$("confirm").value) throw new Error("password_policy_or_confirmation_failed");
   const r=await aqxWalletApi("set_password",{password:$("password").value,confirm_password:$("confirm").value,challenge_token:challengeToken,challenge_answer:$("answer").value,honeypot:$("website").value,elapsed_ms:Date.now()-started});
-  $("form").reset();$("success").style.display="grid";
+  $("form").reset();$("success").querySelector("p").textContent=r.email_notification_sent?"تم إرسال رسالة تأكيد فورية إلى بريد حساب AQX. سيتم تحويلك الآن إلى صفحة الدخول.":"تم إنشاء كلمة المرور، لكن تعذر تأكيد إرسال البريد الآن. سيتم تحويلك إلى صفحة الدخول ويمكن إعادة المحاولة لاحقًا."; $("success").style.display="grid";
   setTimeout(()=>location.replace("login.html?created=1"),1800);
  }catch(err){$("message").textContent=aqxWalletError(err.data?.error||err.message);try{challengeToken=await aqxNewChallenge($("question"));$("answer").value="";started=Date.now()}catch{}}
  finally{$("submit").disabled=false}
