@@ -10,6 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0,#1d2940,#080b12 58%);color:#f5f1e8;font-family:Cairo,Arial,sans-serif;display:grid;place-items:center;padding:22px}.panel{width:min(100%,460px);background:#111824;border:1px solid #b99548;border-radius:22px;padding:30px;box-shadow:0 24px 80px #0009}.brand{text-align:center;color:#d8b65f;font-weight:800;letter-spacing:1px}.lock{font-size:38px;text-align:center;margin:14px}.hint{color:#b8c0cb;font-size:13px;line-height:1.9;text-align:center}label{display:block;margin:17px 0 7px;font-size:14px}input{width:100%;padding:14px;border-radius:11px;border:1px solid #35445a;background:#080e17;color:white;font:inherit;outline:none}input:focus{border-color:#d8b65f}button{width:100%;border:0;border-radius:12px;padding:14px;margin-top:18px;background:linear-gradient(120deg,#c29a43,#f0d77e);color:#16120a;font:800 15px Cairo;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.challenge{padding:12px;border:1px dashed #9f8547;border-radius:10px;text-align:center;color:#f0d77e;margin-top:8px}.msg{margin-top:14px;text-align:center;color:#f0c4a8;font-size:13px;line-height:1.8}.success{position:fixed;inset:0;background:#05080dee;display:none;place-items:center;padding:20px}.success>div{background:#14251e;border:1px solid #59bd83;border-radius:18px;padding:28px;text-align:center;max-width:360px}.hp{position:absolute;left:-10000px;opacity:0}
+.pw-wrap{position:relative}.pw-wrap input{padding-left:48px}
+button.eye{position:absolute;left:5px;top:5px;width:36px;height:32px;min-height:32px;margin:0;padding:0;background:#263449;color:#fff;border-radius:8px;font:18px Arial}
+.strength{display:flex;align-items:center;gap:8px;margin:5px 0;color:#b8c0cb}.strength>div{height:6px;flex:1;background:#293447;border-radius:8px;overflow:hidden}.strength>div span{display:block;height:100%;width:0;background:#d65b5b;transition:width .2s}.rules{display:flex;flex-wrap:wrap;gap:2px 12px;list-style:none;padding:0;margin:4px 0;color:#9ca8b8;font-size:10px}.rules li:before{content:"○ "}.rules li.ok{color:#9edbb5}.rules li.ok:before{content:"✓ "}
 
 /* Stable compact layout */
 html{min-height:100%;background:#080b12}body{display:flex;align-items:center;justify-content:center;min-height:100vh;min-height:100svh;padding:12px 14px;overflow-x:hidden}.panel{width:min(100%,440px);margin:auto;padding:clamp(16px,4vw,25px)}.lock{margin:7px 0;font-size:32px}.hint{margin:0 0 12px;font-size:12.5px;line-height:1.75}label{margin:11px 0 5px}input{min-height:46px;padding:10px 12px}.challenge{min-height:46px;display:flex;align-items:center;justify-content:center}.msg{min-height:42px;margin-top:8px}@media(max-height:650px){body{align-items:flex-start;padding-top:8px;padding-bottom:8px}.panel{padding:14px 17px}.lock{margin:2px 0;font-size:26px}.hint{margin-bottom:7px}label{margin-top:7px}input{min-height:41px}.challenge{min-height:38px}button{margin-top:9px;min-height:42px}.msg{min-height:28px}}
@@ -34,11 +37,13 @@ button{height:43px;min-height:43px;margin-top:9px;padding:7px 12px}
 <main class="panel">
 <div class="brand">AQX UNIVERSAL WALLET</div><div class="lock">🔐</div>
 <h2 style="text-align:center;margin:0 0 8px">إنشاء كلمة مرور المحفظة</h2>
-<p class="hint">هذه كلمة مرور مستقلة عن كلمة مرور حساب AQX. يجب تفعيل البريد ورقم الهاتف في حسابك المركزي قبل المتابعة.</p>
+<p class="hint">هذه كلمة مرور مستقلة عن كلمة مرور حساب AQX.</p>
 <form id="form" autocomplete="off">
-<label for="password">كلمة مرور المحفظة</label><input id="password" type="password" minlength="12" maxlength="128" autocomplete="new-password" required>
-<label for="confirm">تأكيد كلمة المرور</label><input id="confirm" type="password" minlength="12" maxlength="128" autocomplete="new-password" required>
-<label>تحقق البوتات</label><div class="challenge" id="question">جارٍ تجهيز التحقق…</div>
+<label for="password">كلمة مرور المحفظة</label><div class="pw-wrap"><input id="password" type="password" minlength="12" maxlength="128" autocomplete="new-password" required><button class="eye" type="button" data-for="password" aria-label="إظهار كلمة المرور">👁</button></div>
+<div class="strength"><div><span id="strengthBar"></span></div><small id="strengthLabel">قوة كلمة المرور</small></div>
+<ul class="rules"><li id="rlen">12 حرفًا على الأقل</li><li id="rlow">حرف صغير</li><li id="rup">حرف كبير</li><li id="rnum">رقم</li><li id="rsym">رمز خاص</li></ul>
+<label for="confirm">تأكيد كلمة المرور</label><div class="pw-wrap"><input id="confirm" type="password" minlength="12" maxlength="128" autocomplete="new-password" required><button class="eye" type="button" data-for="confirm" aria-label="إظهار تأكيد كلمة المرور">👁</button></div>
+<div class="challenge" id="question">جارٍ تجهيز التحقق…</div>
 <input id="answer" inputmode="numeric" autocomplete="off" placeholder="اكتب ناتج العملية" required>
 <input class="hp" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 <button id="submit" type="submit">إنشاء كلمة المرور</button><div class="msg" id="message" role="status"></div>
@@ -49,12 +54,14 @@ button{height:43px;min-height:43px;margin-top:9px;padding:7px 12px}
 <script>
 let challengeToken="", started=Date.now();
 const $=id=>document.getElementById(id);
+const checks={rlen:p=>p.length>=12&&p.length<=128,rlow:p=>/[a-z]/.test(p),rup:p=>/[A-Z]/.test(p),rnum:p=>/[0-9]/.test(p),rsym:p=>/[^A-Za-z0-9]/.test(p)};
+function strength(){const p=$("password").value;let n=0;Object.entries(checks).forEach(([id,fn])=>{const ok=fn(p);$(id).classList.toggle("ok",ok);if(ok)n++});$("strengthBar").style.width=(n*20)+"%";$("strengthBar").style.background=n<3?"#d65b5b":n<5?"#d7a84e":"#62c98b";$("strengthLabel").textContent="قوة كلمة المرور: "+(p?["ضعيفة جدًا","ضعيفة","متوسطة","جيدة","قوية"][n-1]:"لم تُحدد بعد")}
+$("password").addEventListener("input",strength);
+document.querySelectorAll(".eye").forEach(b=>b.addEventListener("click",()=>{const f=$(b.dataset.for);f.type=f.type==="password"?"text":"password";b.textContent=f.type==="password"?"👁":"🙈"}));
 async function init(){
  try{
   const p=await aqxWalletApi("profile");
   if(!p.wallet_exists||p.wallet_status!=="active") throw new Error("wallet_unavailable");
-  if(!p.email_verified) throw new Error("email_not_verified");
-  if(!p.phone_verified) throw new Error("phone_not_verified");
   if(p.password_set){location.replace("login.html");return}
   challengeToken=await aqxNewChallenge($("question"));
  }catch(e){$("message").textContent=aqxWalletError(e.data?.error||e.message);$("submit").disabled=true}
@@ -62,7 +69,8 @@ async function init(){
 $("form").addEventListener("submit",async e=>{
  e.preventDefault();$("submit").disabled=true;$("message").textContent="جارٍ إنشاء كلمة المرور بأمان…";
  try{
-  if($("password").value!==$("confirm").value) throw new Error("password_policy_or_confirmation_failed");
+  const pw=$("password").value;
+  if(!Object.values(checks).every(fn=>fn(pw)) || pw!==$("confirm").value) throw new Error("password_policy_or_confirmation_failed");
   const r=await aqxWalletApi("set_password",{password:$("password").value,confirm_password:$("confirm").value,challenge_token:challengeToken,challenge_answer:$("answer").value,honeypot:$("website").value,elapsed_ms:Date.now()-started});
   $("form").reset();$("success").querySelector("p").textContent=r.email_notification_sent?"تم إرسال رسالة تأكيد فورية إلى بريد حساب AQX. سيتم تحويلك الآن إلى صفحة الدخول.":"تم إنشاء كلمة المرور، لكن تعذر تأكيد إرسال البريد الآن. سيتم تحويلك إلى صفحة الدخول ويمكن إعادة المحاولة لاحقًا."; $("success").style.display="grid";
   setTimeout(()=>location.replace("login.html?created=1"),1800);
