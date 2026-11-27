@@ -21,7 +21,6 @@ button:disabled{opacity:.5}.msg{min-height:48px;margin-top:14px;text-align:cente
 <p style="text-align:center;color:#b8c0cb;font-size:13px">استخدم كلمة مرور المحفظة المستقلة عن حساب AQX.</p>
 <form id="form" autocomplete="off">
 <label for="password">كلمة مرور المحفظة</label><input id="password" type="password" autocomplete="current-password" required>
-<input id="answer" inputmode="numeric" placeholder="اكتب ناتج العملية" required>
 <input class="hp" id="website" tabindex="-1" autocomplete="off">
 <button id="submit" type="submit">دخول آمن</button><div class="msg" id="message" role="status"></div>
 </form></main>
@@ -35,7 +34,7 @@ async function init(){
 $("form").addEventListener("submit",async e=>{
  e.preventDefault();$("submit").disabled=true;$("message").textContent="جارٍ التحقق من بيانات الدخول…";
  try{
-  const r=await aqxWalletApi("login",{password:$("password").value,honeypot:$("website").value,elapsed_ms:Date.now()-started});
+  const r=await aqxWalletApi("login",{password:$("password").value,honeypot:$("website").value});
   sessionStorage.setItem("aqx_wallet_access_token",r.wallet_token);location.replace("wallet.html");
  }catch(err){$("message").textContent=aqxWalletError(err.data?.error||err.message);$("password").value=""}
  finally{$("submit").disabled=false}
