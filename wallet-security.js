@@ -42,6 +42,7 @@ function aqxWalletError(code) {
     invalid_password: "كلمة المرور غير صحيحة.",
     temporarily_locked: "تم إيقاف محاولات الدخول مؤقتًا لحماية المحفظة.",
     password_policy_or_confirmation_failed: "كلمة المرور يجب أن تكون 12 حرفًا على الأقل، وتحتوي على حرف صغير وحرف كبير ورقم ورمز خاص، مع تطابق التأكيد.",
+    wallet_maintenance: "دخول المحفظة متوقف مؤقتًا لحين اكتمال تجهيز الواجهة وربط الأنظمة.",
     security_service_unavailable: "خدمة الحماية غير متاحة مؤقتًا. حاول لاحقًا."
   };
   return messages[code] || "تعذر إكمال العملية. حاول مرة أخرى.";
