@@ -19,29 +19,24 @@ window.addEventListener("message", event => {
 if (window.opener) window.opener.postMessage({ type: "AQX_WALLET_READY" }, AQX_WALLET_PARENT_ORIGIN);
 
 function aqxIdentityJwt() {
-  const direct = ["aqx_wallet_identity_jwt", "aqx_identity_access_token", "aqx_access_token"];
+  const handed = sessionStorage.getItem("aqx_identity_access_token") || "";
+  if (handed && handed.split(".").length === 3) return handed;
+  const direct = ["aqx_wallet_identity_jwt", "aqx_access_token"];
   for (const key of direct) {
-    const v = localStorage.getItem(key) || sessionStorage.getItem(key);
+    const v = sessionStorage.getItem(key) || localStorage.getItem(key);
     if (v && v.split(".").length === 3) return v;
-  }
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (!key || !key.startsWith("sb-") || !key.endsWith("-auth-token")) continue;
-    try {
-      const value = JSON.parse(localStorage.getItem(key) || "{}");
-      if (value.access_token && value.access_token.split(".").length === 3) return value.access_token;
-    } catch {}
   }
   return "";
 }
 
 async function aqxWalletApi(action, payload = {}, walletToken = "") {
   let jwt = aqxIdentityJwt();
-  if (!jwt && window.opener) {
-    await Promise.race([aqxWalletHandoffReady, new Promise(resolve => setTimeout(resolve, 4000))]);
+  let aqxSessionToken = sessionStorage.getItem("aqx_session_token") || "";
+  if ((!jwt || !aqxSessionToken) && window.opener) {
+    await Promise.race([aqxWalletHandoffReady, new Promise(resolve => setTimeout(resolve, 8000))]);
     jwt = aqxIdentityJwt();
+    aqxSessionToken = sessionStorage.getItem("aqx_session_token") || "";
   }
-  const aqxSessionToken = sessionStorage.getItem("aqx_session_token") || "";
   if (!jwt || !aqxSessionToken) throw Object.assign(new Error("aqx_identity_session_required"), { data: { error: "aqx_identity_session_required" } });
   const headers = { "Content-Type": "application/json", apikey: AQX_WALLET_ANON, "x-aqx-session": aqxSessionToken };
   headers.Authorization = "Bearer " + jwt;
