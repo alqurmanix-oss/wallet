@@ -14,7 +14,7 @@ async function aqxRequireWallet(){
  const walletToken=sessionStorage.getItem("aqx_wallet_access_token");
  const jwt=aqxWalletIdentityJwt();
  if(!walletToken||!jwt){location.replace("login.html");throw new Error("wallet_auth_required");}
- const validation=await fetch(AQX_WALLET_API,{method:"POST",headers:{apikey:AQX_WALLET_ANON,"Content-Type":"application/json"},body:JSON.stringify({action:"validate_session",wallet_token:walletToken}),cache:"no-store"});
+ const validation=await fetch(AQX_WALLET_API,{method:"POST",headers:{apikey:AQX_WALLET_ANON,Authorization:"Bearer "+jwt,"Content-Type":"application/json"},body:JSON.stringify({action:"validate_session",wallet_token:walletToken}),cache:"no-store"});
  const verified=await validation.json().catch(()=>({}));
  if(!validation.ok||verified.ok!==true){sessionStorage.removeItem("aqx_wallet_access_token");location.replace("login.html");throw new Error("wallet_session_invalid");}
  const response=await fetch("https://fkiokwwztbyztleeuwks.supabase.co/rest/v1/rpc/aqx_wallet_my_summary",{method:"POST",headers:{apikey:AQX_WALLET_ANON,Authorization:"Bearer "+jwt,"Content-Type":"application/json"},body:"{}",cache:"no-store"});
