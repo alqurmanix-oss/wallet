@@ -8,8 +8,11 @@ window.addEventListener("message", event => {
   const data = event.data;
   if (!data || data.type !== "AQX_WALLET_IDENTITY_HANDOFF" ||
       typeof data.access_token !== "string" || data.access_token.split(".").length !== 3 ||
+      typeof data.aqx_session_token !== "string" || data.aqx_session_token.length < 20 ||
       typeof data.nonce !== "string" || data.nonce.length > 128) return;
   sessionStorage.setItem("aqx_identity_access_token", data.access_token);
+  sessionStorage.setItem("aqx_session_token", data.aqx_session_token);
+  if (typeof data.aqx_session_id === "string") sessionStorage.setItem("aqx_session_id", data.aqx_session_id);
   aqxWalletHandoffResolve(true);
   window.opener.postMessage({ type: "AQX_WALLET_HANDOFF_ACK", nonce: data.nonce }, AQX_WALLET_PARENT_ORIGIN);
 });
@@ -38,8 +41,10 @@ async function aqxWalletApi(action, payload = {}, walletToken = "") {
     await Promise.race([aqxWalletHandoffReady, new Promise(resolve => setTimeout(resolve, 4000))]);
     jwt = aqxIdentityJwt();
   }
-  const headers = { "Content-Type": "application/json", apikey: AQX_WALLET_ANON };
-  if (jwt) headers.Authorization = "Bearer " + jwt;
+  const aqxSessionToken = sessionStorage.getItem("aqx_session_token") || "";
+  if (!jwt || !aqxSessionToken) throw Object.assign(new Error("aqx_identity_session_required"), { data: { error: "aqx_identity_session_required" } });
+  const headers = { "Content-Type": "application/json", apikey: AQX_WALLET_ANON, "x-aqx-session": aqxSessionToken };
+  headers.Authorization = "Bearer " + jwt;
   const response = await fetch(AQX_WALLET_API, {
     method: "POST", headers,
     body: JSON.stringify({ action, ...payload, ...(walletToken ? { wallet_token: walletToken } : {}) }),
@@ -53,6 +58,10 @@ async function aqxWalletApi(action, payload = {}, walletToken = "") {
 function aqxWalletError(code) {
   const messages = {
     aqx_account_session_required: "افتح المحفظة من داخل حساب AQX بعد تسجيل الدخول.",
+    aqx_identity_session_required: "افتح المحفظة من لوحة التحكم المركزية بعد تسجيل الدخول.",
+    aqx_identity_session_invalid: "انتهت جلسة حساب AQX أو لم تعد صالحة. سجّل الدخول من جديد.",
+    email_not_verified: "يجب تأكيد البريد الإلكتروني في حساب AQX أولًا.",
+    phone_not_verified: "يجب تأكيد رقم الهاتف في حساب AQX أولًا.",
     wallet_unavailable: "المحفظة غير متاحة حاليًا. تواصل مع دعم AQX.",
     wallet_password_already_set: "تم إنشاء كلمة مرور المحفظة بالفعل. انتقل إلى صفحة الدخول.",
     wallet_password_not_set: "لم يتم إنشاء كلمة مرور المحفظة بعد.",
