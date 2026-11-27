@@ -14,31 +14,30 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .brand{text-align:center;color:#d8b65f;font-weight:800}.lock{text-align:center;font-size:38px;margin:15px}h2{text-align:center}label{display:block;margin:18px 0 7px}
 input{display:block;width:100%;min-width:0;padding:14px;border-radius:11px;border:1px solid #35445a;background:#080e17;color:white;font:inherit;font-size:16px}
 button{width:100%;border:0;border-radius:12px;padding:14px;margin-top:18px;background:linear-gradient(120deg,#c29a43,#f0d77e);color:#16120a;font:800 15px Tahoma,Arial,sans-serif;touch-action:manipulation}
-button:disabled{opacity:.5}.challenge{min-height:48px;display:flex;align-items:center;justify-content:center;padding:12px;border:1px dashed #9f8547;border-radius:10px;text-align:center;color:#f0d77e}.msg{min-height:48px;margin-top:14px;text-align:center;color:#f0c4a8;font-size:13px;line-height:1.8}.hp{position:fixed!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important;left:0!important;top:0!important}
+button:disabled{opacity:.5}.msg{min-height:48px;margin-top:14px;text-align:center;color:#f0c4a8;font-size:13px;line-height:1.8}.hp{position:fixed!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important;left:0!important;top:0!important}
 </style></head>
 <body><main class="panel">
 <div class="brand">AQX UNIVERSAL WALLET</div><div class="lock">🔐</div><h2>الدخول إلى محفظتك</h2>
 <p style="text-align:center;color:#b8c0cb;font-size:13px">استخدم كلمة مرور المحفظة المستقلة عن حساب AQX.</p>
 <form id="form" autocomplete="off">
 <label for="password">كلمة مرور المحفظة</label><input id="password" type="password" autocomplete="current-password" required>
-<label>تحقق البوتات</label><div class="challenge" id="question">جارٍ تجهيز التحقق…</div>
 <input id="answer" inputmode="numeric" placeholder="اكتب ناتج العملية" required>
 <input class="hp" id="website" tabindex="-1" autocomplete="off">
 <button id="submit" type="submit">دخول آمن</button><div class="msg" id="message" role="status"></div>
 </form></main>
 <script src="wallet-security.js"></script>
 <script>
-let challengeToken="",started=Date.now();const $=id=>document.getElementById(id);
+const $=id=>document.getElementById(id);
 async function init(){
- try{const p=await aqxWalletApi("profile");if(!p.wallet_exists)throw new Error("wallet_unavailable");if(!p.email_verified)throw new Error("email_not_verified");if(!p.phone_verified)throw new Error("phone_not_verified");if(!p.password_set){location.replace("setup.html");return}challengeToken=await aqxNewChallenge($("question"))}
+ try{const p=await aqxWalletApi("profile");if(!p.wallet_exists)throw new Error("wallet_unavailable");if(!p.email_verified)throw new Error("email_not_verified");if(!p.phone_verified)throw new Error("phone_not_verified");if(!p.password_set){location.replace("setup.html");return}}
  catch(e){$("message").textContent=aqxWalletError(e.data?.error||e.message);$("submit").disabled=true}
 }
 $("form").addEventListener("submit",async e=>{
  e.preventDefault();$("submit").disabled=true;$("message").textContent="جارٍ التحقق من بيانات الدخول…";
  try{
-  const r=await aqxWalletApi("login",{password:$("password").value,challenge_token:challengeToken,challenge_answer:$("answer").value,honeypot:$("website").value,elapsed_ms:Date.now()-started});
+  const r=await aqxWalletApi("login",{password:$("password").value,honeypot:$("website").value,elapsed_ms:Date.now()-started});
   sessionStorage.setItem("aqx_wallet_access_token",r.wallet_token);location.replace("wallet.html");
- }catch(err){$("message").textContent=aqxWalletError(err.data?.error||err.message);try{challengeToken=await aqxNewChallenge($("question"));$("answer").value="";$("password").value="";started=Date.now()}catch{}}
+ }catch(err){$("message").textContent=aqxWalletError(err.data?.error||err.message);$("password").value=""}
  finally{$("submit").disabled=false}
 });init();
 </script></body></html>
