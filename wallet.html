@@ -1,14 +1,89 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex"><meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet">
-<meta name="referrer" content="no-referrer"><meta http-equiv="Cache-Control" content="no-store">
-<title>محفظة AQX</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080b12;color:#f5f1e8;font-family:Cairo,Arial}.box{padding:30px;border:1px solid #b99548;border-radius:20px;background:#111824;text-align:center;max-width:440px;margin:20px}.muted{color:#b8c0cb;font-size:14px}button{border:0;border-radius:10px;padding:12px 25px;background:#d8b65f;font:700 14px Cairo}</style></head>
-<body><main class="box"><div style="font-size:40px">◈</div><h2>محفظة AQX الموحدة</h2><p id="status" class="muted">جارٍ التحقق من جلسة المحفظة…</p><p class="muted">تم تأمين بوابة الدخول. واجهة الرصيد والحركات والتحويلات ستُربط في مرحلة بناء لوحة المحفظة.</p><button id="exit">خروج آمن</button></main>
-<script src="wallet-security.js"></script><script>
-const token=sessionStorage.getItem("aqx_wallet_access_token");const statusEl=document.getElementById("status");
-if(!token){location.replace("login.html")}else{
- aqxWalletApi("validate_session",{},token).then(()=>{statusEl.textContent="تم التحقق من جلسة المحفظة بنجاح."}).catch(()=>{sessionStorage.removeItem("aqx_wallet_access_token");location.replace("login.html")});
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Cache-Control" content="no-store">
+<meta name="theme-color" content="#080d18">
+<title>محفظة AQX الموحدة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#080d18;--panel:#101a2a;--panel2:#142137;--line:#25354c;--gold:#d8b65f;--gold2:#f2d98a;--muted:#9ba9bc;--text:#f5f3ec;--green:#65c9a1}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--bg);scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 82% -10%,#26334b 0,transparent 38%),var(--bg);color:var(--text);font-family:Cairo,Tahoma,Arial,sans-serif}
+button{font:inherit}
+.shell{width:min(1180px,100%);margin:auto;padding:22px 24px 48px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 22px;border-bottom:1px solid #ffffff12}
+.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:46px;height:46px;border:1px solid #b99548;border-radius:15px;display:grid;place-items:center;color:var(--gold2);font-size:27px;background:linear-gradient(145deg,#263149,#111a29);box-shadow:0 8px 24px #0004}
+.brand-name{font-size:17px;font-weight:900;letter-spacing:.4px}.brand-sub{font-size:11px;color:var(--muted);margin-top:-3px}
+.top-actions{display:flex;align-items:center;gap:10px}.status{display:flex;align-items:center;gap:8px;border:1px solid #9c7f3c66;background:#d8b65f12;color:var(--gold2);border-radius:30px;padding:8px 13px;font-size:11px;font-weight:700}.dot{width:7px;height:7px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px #d8b65f88}
+.exit{border:1px solid var(--line);background:#ffffff08;color:#e8edf5;border-radius:12px;padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer}
+.welcome{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:28px 0 20px}.eyebrow{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:1px}.welcome h1{font-size:clamp(23px,4vw,32px);margin:5px 0 2px;font-weight:900}.welcome p{margin:0;color:var(--muted);font-size:13px}
+.wallet-card{position:relative;overflow:hidden;border:1px solid #b9954877;border-radius:24px;padding:25px 28px;background:linear-gradient(115deg,#202e43 0%,#142137 54%,#1d2940 100%);box-shadow:0 20px 55px #0003}
+.wallet-card:before,.wallet-card:after{content:"";position:absolute;border:1px solid #e3c66b20;border-radius:50%;width:270px;height:270px;left:-90px;top:-160px}.wallet-card:after{width:360px;height:360px;left:-130px;top:-205px}
+.card-top,.balance-row,.card-bottom{position:relative;z-index:1}.card-top{display:flex;justify-content:space-between;align-items:center;color:#d6deea;font-size:12px}.wallet-chip{border:1px solid #e2c66a55;color:var(--gold2);border-radius:10px;padding:5px 10px;font-size:10px;font-weight:800}
+.balance-row{margin:23px 0 22px}.balance-label{font-size:12px;color:#c1cada}.balance-value{font-size:clamp(28px,6vw,42px);font-weight:900;letter-spacing:1px;margin-top:3px;color:#fff}.balance-note{font-size:11px;color:#b8c5d7;margin-top:3px}.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #ffffff1c;padding-top:14px;font-size:11px;color:#c6d0de}.card-number{letter-spacing:2px;direction:ltr}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.stat{background:linear-gradient(145deg,#121e30,#0e1726);border:1px solid var(--line);border-radius:17px;padding:17px}.stat-label{color:var(--muted);font-size:11px}.stat-value{font-size:19px;font-weight:800;margin-top:8px}.stat-foot{font-size:10px;color:#8493a8;margin-top:2px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:30px 0 13px}.section-head h2{font-size:17px;margin:0;font-weight:800}.section-head span{font-size:11px;color:var(--muted)}
+.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.action{min-height:132px;text-align:right;padding:18px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#142137,#101a29);color:var(--text);position:relative}.action-icon{width:40px;height:40px;display:grid;place-items:center;border-radius:13px;background:#d8b65f16;color:var(--gold2);font-size:20px;margin-bottom:13px}.action strong{display:block;font-size:13px}.action small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.soon{position:absolute;top:14px;left:13px;font-size:9px;color:#d8c58d;background:#d8b65f12;border:1px solid #d8b65f30;padding:3px 7px;border-radius:20px}
+.content-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:15px}.box{background:#101a2a;border:1px solid var(--line);border-radius:18px;padding:19px}.activity-empty{display:flex;align-items:center;gap:14px;padding:20px 0 7px}.empty-icon{width:48px;height:48px;border-radius:15px;background:#ffffff08;display:grid;place-items:center;font-size:22px;color:var(--gold)}.activity-empty strong{font-size:12px}.activity-empty p{font-size:10px;color:var(--muted);margin:3px 0 0}.security-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0}.security-icon{color:var(--gold2);font-size:18px}.security-row strong{font-size:12px}.security-row p{margin:3px 0 0;color:var(--muted);font-size:10px;line-height:1.8}
+.notice{margin-top:18px;padding:14px 16px;border:1px solid #d8b65f38;border-radius:14px;background:#d8b65f0d;color:#d9c99c;font-size:11px;line-height:1.9}
+.footer{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #ffffff12;margin-top:30px;padding-top:17px;color:#758399;font-size:10px}
+@media(max-width:760px){.shell{padding:15px 14px 35px}.status{font-size:0;padding:10px}.status .dot{width:8px;height:8px}.welcome{padding-top:22px}.stats{gap:8px}.stat{padding:13px 11px}.stat-value{font-size:16px}.actions{grid-template-columns:repeat(2,1fr);gap:9px}.action{min-height:120px;padding:14px}.content-grid{grid-template-columns:1fr}.wallet-card{padding:21px 19px}.footer{flex-direction:column}.brand-name{font-size:15px}}
+@media(max-width:360px){.shell{padding-inline:10px}.exit{padding:8px 10px}.card-bottom{font-size:10px}.stats{grid-template-columns:1fr}.stat{display:flex;align-items:center;justify-content:space-between}.stat-value{margin:0}}
+</style>
+</head>
+<body>
+<main class="shell">
+<header class="topbar">
+ <div class="brand"><div class="brand-mark">◈</div><div><div class="brand-name">AQX UNIVERSAL WALLET</div><div class="brand-sub">المحفظة الموحدة</div></div></div>
+ <div class="top-actions"><div class="status"><i class="dot"></i> وضع التجهيز والصيانة</div><button class="exit" id="exit" type="button">خروج آمن ↗</button></div>
+</header>
+<section class="welcome">
+ <div><div class="eyebrow">مساحة أموالك في AQX</div><h1>مرحبًا بك في محفظتك</h1><p>إدارة أموالك وخدمات الدفع من مكان واحد.</p></div>
+</section>
+<section class="wallet-card" aria-label="ملخص المحفظة">
+ <div class="card-top"><span>ملخص المحفظة</span><span class="wallet-chip">AQX WALLET</span></div>
+ <div class="balance-row"><div class="balance-label">الرصيد المتاح</div><div class="balance-value">— — —</div><div class="balance-note">سيظهر رصيدك الفعلي بعد اكتمال الربط الآمن.</div></div>
+ <div class="card-bottom"><span>رقم المحفظة</span><span class="card-number">•••• •••• ••••</span></div>
+</section>
+<section class="stats" aria-label="إحصائيات المحفظة">
+ <article class="stat"><div><div class="stat-label">الرصيد المعلّق</div><div class="stat-foot">بانتظار ربط البيانات</div></div><div class="stat-value">—</div></article>
+ <article class="stat"><div><div class="stat-label">إجمالي الإيداعات</div><div class="stat-foot">بانتظار ربط البيانات</div></div><div class="stat-value">—</div></article>
+ <article class="stat"><div><div class="stat-label">إجمالي السحوبات</div><div class="stat-foot">بانتظار ربط البيانات</div></div><div class="stat-value">—</div></article>
+</section>
+<div class="section-head"><h2>خدمات المحفظة</h2><span>سيتم تفعيلها بعد اكتمال الربط</span></div>
+<section class="actions">
+ <article class="action"><span class="soon">قريبًا</span><div class="action-icon">＋</div><strong>إضافة أموال</strong><small>شحن رصيد المحفظة</small></article>
+ <article class="action"><span class="soon">قريبًا</span><div class="action-icon">⇧</div><strong>إرسال الأموال</strong><small>تحويل إلى محفظة أخرى</small></article>
+ <article class="action"><span class="soon">قريبًا</span><div class="action-icon">⇩</div><strong>سحب الأموال</strong><small>سحب إلى وسيلة دفع</small></article>
+ <article class="action"><span class="soon">قريبًا</span><div class="action-icon">↗</div><strong>استلام الأموال</strong><small>بيانات استقبال التحويلات</small></article>
+</section>
+<div class="section-head"><h2>حركة المحفظة</h2><span>سجل العمليات</span></div>
+<section class="content-grid">
+ <article class="box"><div class="section-head" style="margin:0"><h2>آخر العمليات</h2><span>لا توجد بيانات معروضة</span></div><div class="activity-empty"><div class="empty-icon">⇄</div><div><strong>سجل العمليات سيظهر هنا</strong><p>لن يتم عرض أي حركة مالية قبل ربطها بمصدر البيانات الموثوق.</p></div></div></article>
+ <article class="box"><div class="section-head" style="margin:0"><h2>أمان المحفظة</h2><span>حماية AQX</span></div><div class="security-row"><div class="security-icon">◈</div><div><strong>كلمة مرور مستقلة</strong><p>المحفظة لها كلمة مرور منفصلة عن كلمة مرور حساب AQX.</p></div></div><div class="security-row"><div class="security-icon">⌁</div><div><strong>الجلسات متوقفة مؤقتًا</strong><p>تم إيقاف الدخول والتحقق من الجلسات لحين اكتمال التجهيز.</p></div></div></article>
+</section>
+<div class="notice">تنبيه أمني: هذه واجهة التصميم الأولية. لا تنفّذ حاليًا أي إيداع أو سحب أو تحويل، ولا تعرض أرصدة أو سجلات مالية فعلية قبل توصيل خدمات المحفظة والتحقق من صلاحياتها.</div>
+<footer class="footer"><span>© AQX — جميع الحقوق محفوظة</span><span>AQX Universal Wallet · Secure Financial Space</span></footer>
+</main>
+<script src="wallet-security.js"></script>
+<script>
+const token=sessionStorage.getItem("aqx_wallet_access_token");
+if(!token){location.replace("login.html")}
+else{
+ aqxWalletApi("validate_session",{},token).catch(()=>{sessionStorage.removeItem("aqx_wallet_access_token");location.replace("login.html")});
 }
-document.getElementById("exit").onclick=async()=>{try{await aqxWalletApi("logout",{},token)}catch{}sessionStorage.removeItem("aqx_wallet_access_token");location.replace("login.html")};
-</script></body></html>
+document.getElementById("exit").addEventListener("click",async()=>{
+ try{if(token)await aqxWalletApi("logout",{},token)}catch{}
+ sessionStorage.removeItem("aqx_wallet_access_token");
+ location.replace("login.html");
+});
+</script>
+</body></html>
