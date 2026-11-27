@@ -13,33 +13,67 @@ body{min-height:100vh;display:grid;place-items:center;padding:18px;background:ra
 .hint{color:#b8c0cb;font-size:13px;line-height:1.9}.msg{min-height:48px;margin-top:14px;color:#f0c4a8;font-size:13px;line-height:1.8}
 a{display:inline-block;margin-top:12px;color:#f0d77e;text-decoration:none}
 </style></head>
-<body><main class="panel">
-<div class="brand">AQX UNIVERSAL WALLET</div><div class="lock">🔐</div>
-<h2>ربط المحفظة بحساب AQX</h2>
-<p class="hint">جارٍ التحقق من جلسة الحساب الموحد وفتح المحفظة بأمان…</p>
-<div class="msg" id="message" role="status" aria-live="polite">يرجى الانتظار.</div>
-<a id="return" href="https://id.alqurmanix.com/dashboard-aqx.html" hidden>العودة إلى مركز إدارة حسابك</a>
+<body>
+<main class="panel" aria-live="polite">
+  <div class="brand">AQX UNIVERSAL WALLET</div>
+  <div class="lock" aria-hidden="true">✦</div>
+  <h2 id="welcome">أهلًا بك في محفظة AQX</h2>
+  <p class="hint" id="welcomeText">يسعدنا انضمامك. نهيّئ لك تجربة مالية سهلة وآمنة داخل منظومة AQX.</p>
+  <div class="msg" id="message" role="status" aria-live="polite" hidden></div>
 </main>
 <script src="wallet-security.js"></script>
 <script>
+const welcome=document.getElementById("welcome");
+const welcomeText=document.getElementById("welcomeText");
 const message=document.getElementById("message");
-const returnLink=document.getElementById("return");
+
+function retryable(error){
+  return !error.status || error.status===408 || error.status===429 || error.status>=500;
+}
+async function requestWithRetry(action){
+  let lastError;
+  for(let attempt=0;attempt<3;attempt++){
+    try{return await aqxWalletApi(action);}
+    catch(error){
+      lastError=error;
+      if(!retryable(error)||attempt===2)throw error;
+      await new Promise(resolve=>setTimeout(resolve,500*(attempt+1)));
+    }
+  }
+  throw lastError;
+}
+function returnToDashboard(){
+  message.hidden=false;
+  message.textContent="نعتذر، تعذّر فتح محفظتك هذه المرة. سنعيدك الآن إلى مركز AQX، ويمكنك المحاولة مجددًا.";
+  window.setTimeout(()=>location.replace("https://id.alqurmanix.com/dashboard-aqx.html"),2200);
+}
 async function init(){
  try{
-  const p=await aqxWalletApi("profile");
+  const p=await requestWithRetry("profile");
   if(!p.wallet_exists||p.wallet_status!=="active")throw new Error("wallet_unavailable");
   if(!p.email_verified)throw new Error("email_not_verified");
   if(!p.phone_verified)throw new Error("phone_not_verified");
-  if(!p.password_set){location.replace("setup.html");return;}
-  const s=await aqxWalletApi("identity_session");
+
+  if(!p.password_set){
+    welcome.textContent="أهلًا بك في محفظة AQX";
+    welcomeText.textContent="يسعدنا أن تكون هذه بدايتك معنا. سنساعدك على إعداد محفظتك لتستمتع بخدمات AQX بسهولة وأمان.";
+    location.replace("setup.html");
+    return;
+  }
+
+  welcome.textContent="مرحبًا بعودتك إلى محفظة AQX";
+  welcomeText.textContent="سعداء بعودتك. محفظتك وخدماتك في انتظارك، بتجربة سلسة وآمنة.";
+
+  const s=await requestWithRetry("identity_session");
   if(s.setup_required){location.replace("setup.html");return;}
   if(!s.wallet_token)throw new Error("session_invalid");
   sessionStorage.setItem("aqx_wallet_access_token",s.wallet_token);
   location.replace("wallet.html");
- }catch(e){
-  message.textContent=aqxWalletError(e.data?.error||e.message);
-  returnLink.hidden=false;
+ }catch(error){
+  console.error("AQX wallet entry:",error?.data?.error||error?.message||"unknown");
+  returnToDashboard();
  }
 }
 init();
-</script></body></html>
+</script>
+</body></html>
