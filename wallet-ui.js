@@ -2,19 +2,16 @@
 const AQX_WALLET_API="https://fkiokwwztbyztleeuwks.supabase.co/functions/v1/aqx-wallet-security";
 const AQX_WALLET_ANON="sb_publishable_4DCXObCqPUoNnI8ANOo8dA_nRAg0y5_";
 function aqxWalletIdentityJwt(){
- const direct=["aqx_wallet_identity_jwt","aqx_identity_access_token","aqx_access_token"];
- for(const key of direct){const value=localStorage.getItem(key)||sessionStorage.getItem(key);if(value&&value.split(".").length===3)return value;}
- for(const store of [localStorage,sessionStorage])for(let i=0;i<store.length;i++){
-  const key=store.key(i);if(!key||!key.startsWith("sb-")||!key.endsWith("-auth-token"))continue;
-  try{const value=JSON.parse(store.getItem(key)||"{}");if(value.access_token&&value.access_token.split(".").length===3)return value.access_token;}catch{}
- }
+ const handed=sessionStorage.getItem("aqx_identity_access_token")||"";
+ if(handed&&handed.split(".").length===3)return handed;
  return "";
 }
 async function aqxRequireWallet(){
  const walletToken=sessionStorage.getItem("aqx_wallet_access_token");
  const jwt=aqxWalletIdentityJwt();
- if(!walletToken||!jwt){location.replace("login.html");throw new Error("wallet_auth_required");}
- const validation=await fetch(AQX_WALLET_API,{method:"POST",headers:{apikey:AQX_WALLET_ANON,Authorization:"Bearer "+jwt,"Content-Type":"application/json"},body:JSON.stringify({action:"validate_session",wallet_token:walletToken}),cache:"no-store"});
+ const aqxSessionToken=sessionStorage.getItem("aqx_session_token")||"";
+ if(!walletToken||!jwt||!aqxSessionToken){location.replace("login.html");throw new Error("wallet_auth_required");}
+ const validation=await fetch(AQX_WALLET_API,{method:"POST",headers:{apikey:AQX_WALLET_ANON,Authorization:"Bearer "+jwt,"Content-Type":"application/json","x-aqx-session":aqxSessionToken},body:JSON.stringify({action:"validate_session",wallet_token:walletToken}),cache:"no-store"});
  const verified=await validation.json().catch(()=>({}));
  if(!validation.ok||verified.ok!==true){sessionStorage.removeItem("aqx_wallet_access_token");location.replace("login.html");throw new Error("wallet_session_invalid");}
  const response=await fetch("https://fkiokwwztbyztleeuwks.supabase.co/rest/v1/rpc/aqx_wallet_my_summary",{method:"POST",headers:{apikey:AQX_WALLET_ANON,Authorization:"Bearer "+jwt,"Content-Type":"application/json"},body:"{}",cache:"no-store"});
