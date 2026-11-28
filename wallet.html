@@ -83,7 +83,7 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 .mt{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}.mt div{border-radius:18px;padding:14px 8px;text-align:center;font-size:12px;font-weight:700;color:var(--mut)}.mt b{display:block;font-size:16px;color:var(--ink);direction:ltr;margin-top:4px}
 .mt div:nth-child(1){background:#fff4d4}.mt div:nth-child(2){background:#eceff7}.mt div:nth-child(3){background:#e5f6ff}.mt div:nth-child(4){background:#f0e9ff}
 .tx{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px dashed var(--bd);font-size:14px}.tx:last-child{border:0}.tx em{font-style:normal;font-weight:900;direction:ltr}.in{color:#0a9d6a}.out{color:var(--r)}
-.ad{display:none!important}
+.ad{border:2px dashed rgba(91,75,255,.35);border-radius:18px;background:repeating-linear-gradient(45deg,#f6f5ff,#f6f5ff 12px,#fff 12px,#fff 24px);display:flex;align-items:center;justify-content:center;color:var(--v);font-weight:800;font-size:13px;margin:16px auto;text-align:center;position:relative}
 .design-note{margin:12px 0 0;padding:10px 14px;border:1px solid rgba(255,255,255,.35);border-radius:14px;background:rgba(255,255,255,.16);font-size:12px;font-weight:700;position:relative;z-index:2}
 .sumcard{grid-column:span 12}
 .sumcard .mt div{background:#fff!important;border:1px solid var(--bd)}
@@ -185,6 +185,7 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 <div class="dash-kicker"><span class="dash-pill"><i class="dash-dot"></i> معاينة واجهة المحفظة</span><span class="dash-pill">💵 العملة الأساسية: USD</span><span class="dash-pill">🔐 مساحة مالية شخصية</span></div>
 <div class="hero"><div class="hero-topline"><div class="hero-label">إجمالي قيمة المحفظة · الدولار الأمريكي</div><span class="hero-chip">AQX WALLET · USD</span></div><div class="amt" id="bal">— USD</div><div class="loc" id="loc">بانتظار ربط قاعدة البيانات</div><div class="hero-foot"><span>✦ إدارة أموالك من مكان واحد</span><span>معاينة تصميمية — لا توجد بيانات مالية فعلية</span></div><div class="design-note">هذه الواجهة للعرض والتصميم فقط؛ الأرصدة والحركات ستظهر بعد الربط.</div>
 <div class="acts"><button data-tx="dep"><span>⬇️</span>إيداع</button><button data-tx="wd"><span>⬆️</span>سحب</button><button data-tx="tr"><span>🔁</span>تحويل</button><button data-tx="rq"><span>📨</span>طلب أموال</button></div></div>
+<div class="ad b728"><small>إعلان · 728×90</small>مساحة إعلان بانر عريض</div>
 <div class="dash-section"><div class="dash-heading"><div><h2>إدارة أموالك</h2><p class="s">أهم خدمات المحفظة في وصول سريع</p></div></div><div class="dash-grid">
 <div class="dash-tile"><span class="dash-icon">⬇️</span><div><b>إضافة أموال</b><small>الإيداع ووسائل الدفع</small></div></div><div class="dash-tile"><span class="dash-icon">⬆️</span><div><b>سحب الأموال</b><small>إدارة عمليات السحب</small></div></div><div class="dash-tile"><span class="dash-icon">🔁</span><div><b>التحويلات</b><small>إرسال واستقبال الأموال</small></div></div><div class="dash-tile"><span class="dash-icon">📨</span><div><b>طلبات الدفع</b><small>طلبات الأموال والفواتير</small></div></div>
 </div></div>
@@ -197,8 +198,10 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 </div>
 <div class="dash-panels"><section class="dash-panel"><div class="dash-panel-head"><div><h2>توزيع الأصول</h2><small>تصور توزيع مقتنيات المحفظة</small></div><span>◉</span></div><div class="empty-visual"><span>◌</span><strong>لا توجد بيانات لعرض التوزيع</strong><small>سيظهر المخطط هنا بعد توافر بيانات الأصول.</small></div></section><section class="dash-panel"><div class="dash-panel-head"><div><h2>نظرة مالية</h2><small>المؤشرات الرئيسية</small></div><span>✦</span></div><div class="empty-visual"><span>📊</span><strong>ملخصك المالي سيظهر هنا</strong><small>المقارنات والفترات والتحليلات في مساحة واحدة.</small></div></section></div>
 <div class="dash-status"><span class="shield">🛡️</span><div><b>حماية المحفظة</b><small>مساحة مخصصة لعرض حالة الأمان والتنبيهات المهمة.</small></div><span class="status-tag">قسم الأمان</span></div>
-<div class="dash-section"><div class="dash-heading"><div><h2>خدمات AQX المالية</h2><p class="s">اختصارات مرئية للأدوات والخدمات الإضافية</p></div></div><div class="dash-shortcuts"><div class="dash-shortcut"><span>💱</span><b>تبديل العملات</b><small>أسعار الصرف</small></div><div class="dash-shortcut"><span>💳</span><b>البطاقات</b><small>إدارة البطاقات</small></div><div class="dash-shortcut"><span>🐷</span><b>الادخار</b><small>الأهداف المالية</small></div><div class="dash-shortcut"><span>🎁</span><b>المكافآت</b><small>العروض والإحالات</small></div></div></div>
+<div class="dash-section"><div class="dash-heading"><div><h2>خدمات AQX المالية</h2><p class="s">اختصارات مرئية للأدوات والخدمات الإضافية</p></div></div><div class="dash-shortcuts"><div class="dash-shortcut"><span>💱</span><b>تبديل العملات</b><small>أسعار الصرف</small></div><div class="dash-shortcut"><span>💳</span><b>البطاقات</b><small>إدارة البطاقات</small></div><div class="dash-shortcut"><span>🐷</span><b>الادخار</b><small>الأهداف المالية</small></div><div class="dash-shortcut"><span>🎁</span><b>المكافآت</b><small>العروض والإحالات</small></div></div><div class="c c5"><div class="ad b300"><small>إعلان · 300×250</small>مساحة إعلان مربع</div><div class="ad b320" style="margin-bottom:0"><small>320×100</small>بانر موبايل</div></div>
+</div>
 <div class="dash-bottom"><div><span>🏠</span>الرئيسية</div><div><span>💳</span>الأموال</div><div><span>📊</span>النشاط</div><div><span>👤</span>حسابي</div></div>
+<div class="ad b970"><small>إعلان · 970×120</small>بانر عريض أسفل الصفحة</div>
 <footer class="ft"><div><a href="terms.html">السياسات والأحكام</a><a href="privacy.html">الخصوصية</a><a href="developers.html">المطورون</a><a href="help.html">المساعدة</a><a href="#">العودة إلى بوابة AQX</a></div>
 <p style="margin-top:12px">🔒 مشفّرة بالكامل · مراقبة على مدار الساعة · © <span id="yr"></span> AQX. جميع الحقوق محفوظة.</p></footer>
 </main>
@@ -310,7 +313,7 @@ function enter(){sessionStorage.aqx_in='1';bal=+L.aqx_bal||0;show('app');beep(78
  renderBal();renderTx();tick();setInterval(tick,1000);L.aqx_last=Date.now();
  $('#chart').innerHTML='<text x="150" y="64" text-anchor="middle" fill="#6B7599" font-size="12">سيظهر النشاط بعد ربط قاعدة البيانات</text>';
  const idle=()=>{clearTimeout(lockI);lockI=setTimeout(lock,300000)};['click','keydown','touchstart','mousemove'].forEach(e=>addEventListener(e,idle,{passive:true}));idle();
- /* لا تُعرض إعلانات تجريبية أو نوافذ تلقائية في مرحلة التصميم */}
+ adT.push(setTimeout(popAd,12000),setTimeout(toastAd,25000),setTimeout(fullAd,60000),setInterval(toastAd,90000))}
 function lock(){adT.forEach(clearTimeout);$('#lp').value='';show('login');$('#gT').textContent='';$('#e2').textContent='تم قفل المحفظة تلقائيًا لعدم النشاط'}
 $('#lk').onclick=e=>{e.preventDefault();lock();location.reload()};$('#lo').onclick=e=>{e.preventDefault();sessionStorage.clear();location.reload()};
 /* قوائم */
