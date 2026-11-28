@@ -83,7 +83,11 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 .mt{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}.mt div{border-radius:18px;padding:14px 8px;text-align:center;font-size:12px;font-weight:700;color:var(--mut)}.mt b{display:block;font-size:16px;color:var(--ink);direction:ltr;margin-top:4px}
 .mt div:nth-child(1){background:#fff4d4}.mt div:nth-child(2){background:#eceff7}.mt div:nth-child(3){background:#e5f6ff}.mt div:nth-child(4){background:#f0e9ff}
 .tx{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px dashed var(--bd);font-size:14px}.tx:last-child{border:0}.tx em{font-style:normal;font-weight:900;direction:ltr}.in{color:#0a9d6a}.out{color:var(--r)}
-.ad{border:2px dashed rgba(91,75,255,.35);border-radius:18px;background:repeating-linear-gradient(45deg,#f6f5ff,#f6f5ff 12px,#fff 12px,#fff 24px);display:flex;align-items:center;justify-content:center;color:var(--v);font-weight:800;font-size:13px;margin:16px auto;text-align:center;position:relative}
+.ad{display:none!important}
+.design-note{margin:12px 0 0;padding:10px 14px;border:1px solid rgba(255,255,255,.35);border-radius:14px;background:rgba(255,255,255,.16);font-size:12px;font-weight:700;position:relative;z-index:2}
+.sumcard{grid-column:span 12}
+.sumcard .mt div{background:#fff!important;border:1px solid var(--bd)}
+.sumcard .mt b{font-size:15px}
 .ad small{position:absolute;top:4px;right:10px;font-size:10px;color:var(--mut)}
 .b728{max-width:728px;height:90px}.b320{max-width:320px;height:100px}.b300{max-width:300px;height:250px}.b970{max-width:970px;height:120px}
 .toast{position:fixed;top:78px;left:14px;z-index:150;background:#fff;border:1px solid var(--bd);border-right:5px solid var(--g);border-radius:18px;padding:14px 16px;max-width:320px;box-shadow:var(--sh);animation:pop .4s;font-size:13px}
@@ -142,17 +146,15 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 <div class="clk"><span id="cd"></span><div id="ct"></div></div><div class="wno" id="sNo"></div></div><nav class="nav" id="nav"></nav></aside>
 <main>
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:14px"><div><h2 id="hi"></h2><p class="s">نظرة عامة على ثروتك الرقمية اليوم</p></div><a href="#" class="btn gl" style="width:auto;text-decoration:none;display:inline-block">↩ العودة إلى بوابة AQX</a></div>
-<div class="hero"><div class="loc">الرصيد الفعلي · دولار أمريكي</div><div class="amt" id="bal"></div><div class="loc" id="loc"></div>
+<div class="hero"><div class="loc">الرصيد الإجمالي · الدولار الأمريكي (USD)</div><div class="amt" id="bal">— USD</div><div class="loc" id="loc">بانتظار ربط قاعدة البيانات</div><div class="design-note">معاينة تصميمية فقط — لا توجد أرصدة أو معاملات مالية فعلية متصلة حاليًا</div>
 <div class="acts"><button data-tx="dep"><span>⬇️</span>إيداع</button><button data-tx="wd"><span>⬆️</span>سحب</button><button data-tx="tr"><span>🔁</span>تحويل</button><button data-tx="rq"><span>📨</span>طلب أموال</button></div></div>
-<div class="ad b728"><small>إعلان · 728×90</small>مساحة إعلان بانر عريض</div>
 <div class="grid">
+<div class="c sumcard"><h2>ملخص الأرصدة</h2><p class="s">تفصيل الرصيد والحركة المالية — سيُملأ بعد الربط</p><div class="mt" id="walletSummaryCards"><div>الرصيد المتاح<b>— USD</b></div><div>الرصيد المعلّق<b>— USD</b></div><div>إجمالي الإيداعات<b>— USD</b></div><div>إجمالي السحوبات<b>— USD</b></div></div></div>
 <div class="c c7"><h2>ما يعادل رصيدك من المعادن والأصول</h2><p class="s">أسعار تجريبية، اربطها بالمصدر الحي لاحقًا</p><div class="mt" id="mt"></div></div>
 <div class="c c5"><h2>نشاط الأسبوع</h2><svg id="chart" viewBox="0 0 300 120" width="100%"></svg></div>
 <div class="c c7"><h2>آخر المعاملات</h2><div id="txs"></div></div>
-<div class="c c5"><div class="ad b300"><small>إعلان · 300×250</small>مساحة إعلان مربع</div><div class="ad b320" style="margin-bottom:0"><small>320×100</small>بانر موبايل</div></div>
 <div class="c c12"><h2>💡 مزايا قادمة</h2><p class="s">مكافآت الإحالة · بطاقة افتراضية فورية · ادخار تلقائي بالفكة · فواتير وخدمات · تنبيهات ذكية للأسعار · ربط مصرفي · تقارير ضريبية</p></div>
 </div>
-<div class="ad b970"><small>إعلان · 970×120</small>بانر عريض أسفل الصفحة</div>
 <footer class="ft"><div><a href="terms.html">السياسات والأحكام</a><a href="privacy.html">الخصوصية</a><a href="developers.html">المطورون</a><a href="help.html">المساعدة</a><a href="#">العودة إلى بوابة AQX</a></div>
 <p style="margin-top:12px">🔒 مشفّرة بالكامل · مراقبة على مدار الساعة · © <span id="yr"></span> AQX. جميع الحقوق محفوظة.</p></footer>
 </main>
@@ -225,7 +227,7 @@ function chk(){const v=$('#p1').value;let n=0;$$('#rules li').forEach(li=>{const
 $('#mk').onclick=async()=>{const c=$('#create .card');c.querySelector('.laser').classList.add('on');beep(880,.1);
  const salt=hex(crypto.getRandomValues(new Uint8Array(16)));L.aqx_s=salt;L.aqx_h=await hash($('#p1').value,salt);
  const w='AQX-'+(rnd(1)[0]%9000+1000)+'-'+(rnd(1)[0]%9000+1000),n='5821 '+(rnd(1)[0]%9000+1000)+' '+(rnd(1)[0]%9000+1000)+' '+(rnd(1)[0]%9000+1000);
- L.aqx_wid=w;L.aqx_wno=n;L.aqx_name=name;L.aqx_bal='12480.55';$('#p1').value=$('#p2').value='';
+ L.aqx_wid=w;L.aqx_wno=n;L.aqx_name=name;L.aqx_bal='';$('#p1').value=$('#p2').value='';
  setTimeout(()=>{c.querySelector('.laser').classList.remove('on');beep(1046,.3);
   modal(`<div class="tick">✓</div><h1>تم تفعيل محفظتك بنجاح 🎉</h1><p class="s">تم إنشاء كلمة السر وتشفيرها. احتفظ ببيانات محفظتك:</p>
   <div class="copy"><span>${w}</span><small>معرّف المحفظة</small><button data-c="${w}">نسخ</button></div>
@@ -255,17 +257,16 @@ const NAV=[['عام',[['📊','نظرة عامة','#'],['🔔','الإشعارا
 ['الحساب والأمان',[['👤','الملف الشخصي','profile.html'],['🪪','توثيق الهوية KYC','kyc.html'],['🛡️','مركز الأمان','security.html'],['📱','الأجهزة والجلسات','devices.html'],['🔐','المصادقة الثنائية','2fa.html'],['⚙️','الإعدادات','settings.html'],['🌐','اللغة والعملة','language.html']]],
 ['الدعم والمعلومات',[['💬','الدعم والمساعدة','support.html'],['❓','مركز المساعدة','help.html'],['👨‍💻','المطورون API','developers.html'],['📜','السياسات والأحكام','terms.html'],['🔏','سياسة الخصوصية','privacy.html'],['⚖️','الشكاوى والنزاعات','disputes.html'],['ℹ️','عن AQX','about.html']]]];
 $('#nav').innerHTML=NAV.map(([t,a])=>`<h4>${t}</h4>`+a.map(([i,n,h],k)=>`<a href="${h}" class="${h==='#'&&t==='عام'&&!k?'act':''}"><span>${i}</span>${n}</a>`).join('')).join('')+'<h4>—</h4><a href="'+CFG.HOME+'">↩ العودة إلى بوابة AQX</a>';
-function renderBal(){const loc=new Intl.NumberFormat('ar-EG',{style:'currency',currency:CUR}).format(bal*RATE[CUR]);$('#bal').textContent=usd(bal);$('#loc').textContent=CUR==='USD'?'':'≈ '+loc+' بالعملة المحلية';
- const M=[['🥇 ذهب (جرام)',76],['🥈 فضة (جرام)',.95],['💎 ماس (قيراط)',5500],['⚪ بلاتين (جرام)',32]];$('#mt').innerHTML=M.map(([n,p])=>`<div>${n}<b>${(bal/p).toLocaleString('en',{maximumFractionDigits:2})}</b></div>`).join('')}
-let TX=[['إيداع بنكي',1500,'اليوم'],['تحويل إلى أحمد',-220,'أمس'],['مكافأة إحالة',25,'منذ ٣ أيام'],['سحب إلى بطاقة',-400,'منذ أسبوع']];
-function renderTx(){$('#txs').innerHTML=TX.slice(0,6).map(([n,v,d])=>`<div class="tx"><div>${n}<br><small style="color:var(--mut)">${d}</small></div><em class="${v>0?'in':'out'}">${v>0?'+':''}${usd(v)}</em></div>`).join('')}
+function renderBal(){$('#bal').textContent='— USD';$('#loc').textContent='ستظهر الأرصدة الفعلية بعد ربط قاعدة البيانات';const M=['🥇 الذهب','🥈 الفضة','💎 الألماس','⚪ البلاتين'];$('#mt').innerHTML=M.map(n=>`<div>${n}<b>—</b></div>`).join('')}
+let TX=[];
+function renderTx(){$('#txs').innerHTML=TX.length?TX.slice(0,6).map(([n,v,d])=>`<div class="tx"><div>${n}<br><small style="color:var(--mut)">${d}</small></div><em class="${v>0?'in':'out'}">${v>0?'+':''}${usd(v)}</em></div>`).join(''):'<div class="s" style="padding:18px 0;text-align:center">لا توجد معاملات معروضة — سيظهر السجل بعد ربط قاعدة البيانات</div>'}
 function tick(){const n=new Date();$('#cd').textContent=new Intl.DateTimeFormat('ar-EG',{timeZone:TZ,dateStyle:'full'}).format(n);$('#ct').textContent=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,timeStyle:'medium'}).format(n)+' · '+TZ}
 function enter(){sessionStorage.aqx_in='1';bal=+L.aqx_bal||0;show('app');beep(784,.15);
  $('#tId').textContent=L.aqx_wid;$('#tNo').textContent=L.aqx_wno;$('#sNo').textContent='رقم المحفظة: '+L.aqx_wno;$('#tAv').textContent=name.trim().charAt(0).toUpperCase();$('#hi').textContent='أهلاً يا '+name+' 👋';$('#yr').textContent=new Date().getFullYear();
  renderBal();renderTx();tick();setInterval(tick,1000);L.aqx_last=Date.now();
- $('#chart').innerHTML=[40,70,55,95,60,110,80].map((h,i)=>`<rect x="${i*42+12}" y="${120-h}" width="26" height="${h}" rx="9" fill="url(#cg)"/>`).join('')+'<defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#5B4BFF"/><stop offset="1" stop-color="#00C9A7"/></linearGradient></defs>';
+ $('#chart').innerHTML='<text x="150" y="64" text-anchor="middle" fill="#6B7599" font-size="12">سيظهر النشاط بعد ربط قاعدة البيانات</text>';
  const idle=()=>{clearTimeout(lockI);lockI=setTimeout(lock,300000)};['click','keydown','touchstart','mousemove'].forEach(e=>addEventListener(e,idle,{passive:true}));idle();
- adT.push(setTimeout(popAd,12000),setTimeout(toastAd,25000),setTimeout(fullAd,60000),setInterval(toastAd,90000))}
+ /* لا تُعرض إعلانات تجريبية أو نوافذ تلقائية في مرحلة التصميم */}
 function lock(){adT.forEach(clearTimeout);$('#lp').value='';show('login');$('#gT').textContent='';$('#e2').textContent='تم قفل المحفظة تلقائيًا لعدم النشاط'}
 $('#lk').onclick=e=>{e.preventDefault();lock();location.reload()};$('#lo').onclick=e=>{e.preventDefault();sessionStorage.clear();location.reload()};
 /* قوائم */
@@ -274,10 +275,10 @@ $('#um').onclick=e=>{e.stopPropagation();$('#dd').classList.toggle('on')};docume
 /* عمليات */
 const TT={dep:['إيداع','⬇️'],wd:['سحب','⬆️'],tr:['تحويل','🔁'],rq:['طلب أموال','📨']};
 document.addEventListener('click',e=>{const k=e.target.closest('[data-tx]');if(!k)return;const t=k.dataset.tx;
- const m=modal(`<h1>${TT[t][1]} ${TT[t][0]}</h1><div class="fm"><label>المبلغ بالدولار</label><input id="am" type="number" min="1" step="0.01" placeholder="0.00">${t==='tr'||t==='rq'?'<label>معرّف أو رقم المحفظة</label><input id="to" placeholder="AQX-0000-0000">':''}<p class="s" id="fe" style="margin-top:8px">الرسوم: $0.00</p></div><div class="err" id="me"></div><button class="btn" id="ok" style="margin-top:10px">تأكيد ${TT[t][0]}</button><button class="btn gl" data-x style="margin-top:8px">إلغاء</button>`);
- m.querySelector('#am').oninput=e=>m.querySelector('#fe').textContent='الرسوم: '+usd((+e.target.value||0)*(t==='tr'?.005:t==='wd'?.01:0));
- m.querySelector('#ok').onclick=()=>{const a=+m.querySelector('#am').value;if(!(a>0))return m.querySelector('#me').textContent='أدخل مبلغًا صحيحًا';if((t==='wd'||t==='tr')&&a>bal)return m.querySelector('#me').textContent='الرصيد غير كافٍ';
-  if(t!=='rq'){bal+=t==='dep'?a:-a;L.aqx_bal=bal}TX.unshift([TT[t][0],t==='dep'?a:t==='rq'?0:-a,'الآن']);renderBal();renderTx();beep(1046,.25);m.querySelector('.mb').innerHTML=`<div class="tick">✓</div><h2>تمت العملية بنجاح</h2><button class="btn" data-x style="margin-top:14px">حسنًا</button>`}});
+ const m=modal(`<h1>${TT[t][1]} ${TT[t][0]}</h1><p class="s">معاينة تصميمية — لن يتم تنفيذ أو تسجيل أي حركة مالية قبل ربط قاعدة البيانات.</p><div class="fm"><label>المبلغ بالدولار</label><input id="am" type="number" min="1" step="0.01" placeholder="0.00">${t==='tr'||t==='rq'?'<label>معرّف أو رقم المحفظة</label><input id="to" placeholder="AQX-0000-0000">':''}<p class="s" id="fe" style="margin-top:8px">الرسوم التقديرية: — USD</p></div><div class="err" id="me"></div><button class="btn" id="ok" style="margin-top:10px">معاينة التفاصيل</button><button class="btn gl" data-x style="margin-top:8px">إغلاق</button>`);
+ m.querySelector('#am').oninput=e=>{const a=+e.target.value||0,fee=a*(t==='tr'?.005:t==='wd'?.01:0);m.querySelector('#fe').textContent='الرسوم التقديرية: '+usd(fee)};
+ m.querySelector('#ok').onclick=()=>{const a=+m.querySelector('#am').value;if(!(a>0))return m.querySelector('#me').textContent='أدخل مبلغًا صحيحًا';if((t==='tr'||t==='rq')&&!m.querySelector('#to').value.trim())return m.querySelector('#me').textContent='أدخل بيانات المحفظة المطلوبة';const fee=a*(t==='tr'?.005:t==='wd'?.01:0);m.querySelector('.mb').innerHTML='<div class="tick" style="background:linear-gradient(135deg,#64748b,#94a3b8);box-shadow:none">i</div><h2>معاينة فقط — لم تُنفّذ العملية</h2><p class="s">نوع العملية: '+TT[t][0]+'</p><p class="s">المبلغ: '+usd(a)+'</p><p class="s">الرسوم التقديرية: '+usd(fee)+'</p><p class="s">لن يتغير الرصيد ولن يُسجل أي قيد مالي في هذه المرحلة.</p><button class="btn" data-x style="margin-top:14px">حسنًا</button>'};
+ });
 /* أيقونة عائمة */
 const FT=[['💱','محوّل العملات'],['🧮','حاسبة'],['📷','ادفع بـ QR'],['🐷','هدف ادخار'],['📊','تنبيه الأسعار'],['💳','بطاقة افتراضية'],['🎧','دعم فوري']];
 const fab=$('#fab');FT.forEach(([i,n],k)=>{const b=document.createElement('button');b.className='it';b.textContent=i;b.title=n;const a=k/6*Math.PI/2;b.style.setProperty('--x',Math.round(Math.sin(a)*(110+k*4)));b.style.setProperty('--y',Math.round(Math.cos(a)*(110+k*4)));b.onclick=()=>tool(k);fab.appendChild(b)});
