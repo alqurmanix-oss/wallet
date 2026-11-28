@@ -102,6 +102,42 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 .cg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.cg button{padding:14px;border-radius:14px;background:#f0f2ff;font-weight:800;font-size:18px}
 .alarm{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;font-weight:900;animation:al .35s steps(1) infinite;padding:20px}
 @keyframes al{0%{background:#ff0020}50%{background:#3a0008}}.alarm h1{font-size:clamp(30px,8vw,64px)}
+
+/* ===== لوحة المحفظة الرئيسية: تحسينات واجهة فقط ===== */
+.dash-kicker{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.dash-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:30px;background:rgba(91,75,255,.08);border:1px solid var(--bd);font-size:12px;font-weight:800;color:var(--ink)}
+.dash-dot{width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 0 4px rgba(242,176,30,.13)}
+.hero-topline{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:2;flex-wrap:wrap}
+.hero-label{font-size:13px;font-weight:800;opacity:.9}
+.hero-chip{padding:7px 12px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);border-radius:30px;font-size:11px;font-weight:800}
+.hero-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;position:relative;z-index:2;font-size:12px;font-weight:700;opacity:.9}
+.dash-section{margin-top:22px}
+.dash-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.dash-heading .s{margin-top:3px}
+.dash-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.dash-tile{min-width:0;padding:16px;border:1px solid var(--bd);border-radius:20px;background:rgba(255,255,255,.82);box-shadow:0 12px 28px -22px rgba(60,50,180,.35);display:flex;align-items:center;gap:12px}
+.dash-icon{width:44px;height:44px;flex:0 0 44px;border-radius:15px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,#eeedff,#e4fff7)}
+.dash-tile b{display:block;font-size:13px}.dash-tile small{display:block;color:var(--mut);font-size:11px;margin-top:2px;line-height:1.6}
+.dash-panels{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:16px}
+.dash-panel{background:var(--card);border:1px solid var(--bd);border-radius:24px;padding:20px;box-shadow:var(--sh);backdrop-filter:blur(16px);min-width:0}
+.dash-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.dash-panel-head small{color:var(--mut);font-size:11px}
+.empty-visual{min-height:150px;border:1px dashed rgba(91,75,255,.25);border-radius:18px;background:linear-gradient(135deg,rgba(91,75,255,.045),rgba(0,201,167,.055));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;color:var(--mut);gap:8px}
+.empty-visual strong{font-size:14px;color:var(--ink)}.empty-visual span{font-size:30px}
+.dash-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.dash-metric{padding:14px;border-radius:17px;background:#fff;border:1px solid var(--bd)}
+.dash-metric small{display:block;color:var(--mut);font-size:11px}.dash-metric b{display:block;font-size:17px;margin-top:5px;direction:ltr;text-align:right}
+.dash-status{display:flex;align-items:center;gap:12px;padding:15px 17px;border-radius:20px;border:1px solid rgba(0,201,167,.25);background:linear-gradient(100deg,rgba(0,201,167,.08),rgba(91,75,255,.06));margin-top:16px}
+.dash-status .shield{width:42px;height:42px;border-radius:14px;background:#e4fff5;display:grid;place-items:center;font-size:22px;flex:0 0 42px}
+.dash-status b{display:block;font-size:13px}.dash-status small{display:block;color:var(--mut);font-size:11px;line-height:1.7}
+.dash-status .status-tag{margin-right:auto;white-space:nowrap;font-size:11px;font-weight:800;color:#087a5a;background:#e4fff5;padding:6px 10px;border-radius:20px}
+.dash-shortcuts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.dash-shortcut{padding:15px 10px;text-align:center;border-radius:18px;background:#fff;border:1px solid var(--bd)}
+.dash-shortcut span{display:block;font-size:23px;margin-bottom:5px}.dash-shortcut b{font-size:12px;display:block}.dash-shortcut small{color:var(--mut);font-size:10px}
+.dash-bottom{display:none}
+@media(max-width:820px){.dash-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-panels{grid-template-columns:1fr}.dash-shortcuts{grid-template-columns:repeat(2,1fr)}.dash-bottom{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;bottom:0;left:0;right:0;z-index:80;padding:9px 8px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-top:1px solid var(--bd);box-shadow:0 -10px 30px -22px rgba(60,50,180,.5)}.dash-bottom div{text-align:center;color:var(--mut);font-size:10px;font-weight:800}.dash-bottom span{display:block;font-size:19px;margin-bottom:2px}main{padding-bottom:100px}}
+@media(max-width:420px){.dash-tile{padding:12px;gap:9px}.dash-icon{width:38px;height:38px;flex-basis:38px;font-size:19px}.dash-tile b{font-size:12px}.hero{padding:21px}.hero .amt{font-size:36px}.dash-status{align-items:flex-start}.dash-status .status-tag{font-size:10px;padding:5px 8px}}
+
 @media(max-width:820px){.c7,.c5,.c4{grid-column:span 12}.acts,.mt{grid-template-columns:repeat(2,1fr)}.usr .t{display:none}.usr{padding:4px}.rules{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
 </style>
@@ -145,16 +181,24 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 <aside class="sb" id="sb"><div class="sbh"><div class="logo"><span class="lg">AQ</span>AQX Vault</div>
 <div class="clk"><span id="cd"></span><div id="ct"></div></div><div class="wno" id="sNo"></div></div><nav class="nav" id="nav"></nav></aside>
 <main>
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:14px"><div><h2 id="hi"></h2><p class="s">نظرة عامة على ثروتك الرقمية اليوم</p></div><a href="#" class="btn gl" style="width:auto;text-decoration:none;display:inline-block">↩ العودة إلى بوابة AQX</a></div>
-<div class="hero"><div class="loc">الرصيد الإجمالي · الدولار الأمريكي (USD)</div><div class="amt" id="bal">— USD</div><div class="loc" id="loc">بانتظار ربط قاعدة البيانات</div><div class="design-note">معاينة تصميمية فقط — لا توجد أرصدة أو معاملات مالية فعلية متصلة حاليًا</div>
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:14px"><div><h2 id="hi"></h2><p class="s">لوحة التحكم المالية — نظرة شاملة على محفظتك</p></div><a href="#" class="btn gl" style="width:auto;text-decoration:none;display:inline-block">↩ العودة إلى بوابة AQX</a></div>
+<div class="dash-kicker"><span class="dash-pill"><i class="dash-dot"></i> معاينة واجهة المحفظة</span><span class="dash-pill">💵 العملة الأساسية: USD</span><span class="dash-pill">🔐 مساحة مالية شخصية</span></div>
+<div class="hero"><div class="hero-topline"><div class="hero-label">إجمالي قيمة المحفظة · الدولار الأمريكي</div><span class="hero-chip">AQX WALLET · USD</span></div><div class="amt" id="bal">— USD</div><div class="loc" id="loc">بانتظار ربط قاعدة البيانات</div><div class="hero-foot"><span>✦ إدارة أموالك من مكان واحد</span><span>معاينة تصميمية — لا توجد بيانات مالية فعلية</span></div><div class="design-note">هذه الواجهة للعرض والتصميم فقط؛ الأرصدة والحركات ستظهر بعد الربط.</div>
 <div class="acts"><button data-tx="dep"><span>⬇️</span>إيداع</button><button data-tx="wd"><span>⬆️</span>سحب</button><button data-tx="tr"><span>🔁</span>تحويل</button><button data-tx="rq"><span>📨</span>طلب أموال</button></div></div>
+<div class="dash-section"><div class="dash-heading"><div><h2>إدارة أموالك</h2><p class="s">أهم خدمات المحفظة في وصول سريع</p></div></div><div class="dash-grid">
+<div class="dash-tile"><span class="dash-icon">⬇️</span><div><b>إضافة أموال</b><small>الإيداع ووسائل الدفع</small></div></div><div class="dash-tile"><span class="dash-icon">⬆️</span><div><b>سحب الأموال</b><small>إدارة عمليات السحب</small></div></div><div class="dash-tile"><span class="dash-icon">🔁</span><div><b>التحويلات</b><small>إرسال واستقبال الأموال</small></div></div><div class="dash-tile"><span class="dash-icon">📨</span><div><b>طلبات الدفع</b><small>طلبات الأموال والفواتير</small></div></div>
+</div></div>
 <div class="grid">
-<div class="c sumcard"><h2>ملخص الأرصدة</h2><p class="s">تفصيل الرصيد والحركة المالية — سيُملأ بعد الربط</p><div class="mt" id="walletSummaryCards"><div>الرصيد المتاح<b>— USD</b></div><div>الرصيد المعلّق<b>— USD</b></div><div>إجمالي الإيداعات<b>— USD</b></div><div>إجمالي السحوبات<b>— USD</b></div></div></div>
-<div class="c c7"><h2>ما يعادل رصيدك من المعادن والأصول</h2><p class="s">أسعار تجريبية، اربطها بالمصدر الحي لاحقًا</p><div class="mt" id="mt"></div></div>
-<div class="c c5"><h2>نشاط الأسبوع</h2><svg id="chart" viewBox="0 0 300 120" width="100%"></svg></div>
-<div class="c c7"><h2>آخر المعاملات</h2><div id="txs"></div></div>
-<div class="c c12"><h2>💡 مزايا قادمة</h2><p class="s">مكافآت الإحالة · بطاقة افتراضية فورية · ادخار تلقائي بالفكة · فواتير وخدمات · تنبيهات ذكية للأسعار · ربط مصرفي · تقارير ضريبية</p></div>
+<div class="c sumcard"><div class="dash-panel-head"><div><h2>ملخص الأرصدة</h2><p class="s">نظرة سريعة على مكونات رصيدك</p></div><span class="dash-pill">USD</span></div><div class="mt" id="walletSummaryCards"><div>الرصيد المتاح<b>— USD</b></div><div>الرصيد المعلّق<b>— USD</b></div><div>إجمالي الإيداعات<b>— USD</b></div><div>إجمالي السحوبات<b>— USD</b></div></div></div>
+<div class="c c7"><h2>الأصول والمعادن</h2><p class="s">عرض تقديري لقيمة الأصول — ستظهر البيانات عند توفرها</p><div class="mt" id="mt"></div></div>
+<div class="c c5"><h2>النشاط المالي</h2><p class="s">ملخص حركة المحفظة خلال الفترة المحددة</p><svg id="chart" viewBox="0 0 300 120" width="100%" role="img" aria-label="مساحة الرسم البياني للنشاط المالي"></svg></div>
+<div class="c c7"><h2>آخر المعاملات</h2><p class="s">أحدث عمليات الإيداع والسحب والتحويل</p><div id="txs"></div></div>
+<div class="c c5"><h2>مؤشرات المحفظة</h2><p class="s">ملخص بصري للمعلومات المالية</p><div class="dash-metrics"><div class="dash-metric"><small>الأرباح</small><b>— USD</b></div><div class="dash-metric"><small>المبالغ المحجوزة</small><b>— USD</b></div><div class="dash-metric"><small>التحويلات</small><b>—</b></div><div class="dash-metric"><small>المدفوعات</small><b>—</b></div></div></div>
 </div>
+<div class="dash-panels"><section class="dash-panel"><div class="dash-panel-head"><div><h2>توزيع الأصول</h2><small>تصور توزيع مقتنيات المحفظة</small></div><span>◉</span></div><div class="empty-visual"><span>◌</span><strong>لا توجد بيانات لعرض التوزيع</strong><small>سيظهر المخطط هنا بعد توافر بيانات الأصول.</small></div></section><section class="dash-panel"><div class="dash-panel-head"><div><h2>نظرة مالية</h2><small>المؤشرات الرئيسية</small></div><span>✦</span></div><div class="empty-visual"><span>📊</span><strong>ملخصك المالي سيظهر هنا</strong><small>المقارنات والفترات والتحليلات في مساحة واحدة.</small></div></section></div>
+<div class="dash-status"><span class="shield">🛡️</span><div><b>حماية المحفظة</b><small>مساحة مخصصة لعرض حالة الأمان والتنبيهات المهمة.</small></div><span class="status-tag">قسم الأمان</span></div>
+<div class="dash-section"><div class="dash-heading"><div><h2>خدمات AQX المالية</h2><p class="s">اختصارات مرئية للأدوات والخدمات الإضافية</p></div></div><div class="dash-shortcuts"><div class="dash-shortcut"><span>💱</span><b>تبديل العملات</b><small>أسعار الصرف</small></div><div class="dash-shortcut"><span>💳</span><b>البطاقات</b><small>إدارة البطاقات</small></div><div class="dash-shortcut"><span>🐷</span><b>الادخار</b><small>الأهداف المالية</small></div><div class="dash-shortcut"><span>🎁</span><b>المكافآت</b><small>العروض والإحالات</small></div></div></div>
+<div class="dash-bottom"><div><span>🏠</span>الرئيسية</div><div><span>💳</span>الأموال</div><div><span>📊</span>النشاط</div><div><span>👤</span>حسابي</div></div>
 <footer class="ft"><div><a href="terms.html">السياسات والأحكام</a><a href="privacy.html">الخصوصية</a><a href="developers.html">المطورون</a><a href="help.html">المساعدة</a><a href="#">العودة إلى بوابة AQX</a></div>
 <p style="margin-top:12px">🔒 مشفّرة بالكامل · مراقبة على مدار الساعة · © <span id="yr"></span> AQX. جميع الحقوق محفوظة.</p></footer>
 </main>
