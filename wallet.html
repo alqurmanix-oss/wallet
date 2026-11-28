@@ -188,7 +188,7 @@ const name=new URLSearchParams(location.search).get('u')||L.aqx_name||'عميل�
 const show=id=>{['gate','create','login','app'].forEach(x=>$('#'+x).classList.toggle('hide',x!==id));scrollTo(0,0)};
 /* ===== تحقق البوتات: مربع التحقق الأساسي ===== */
 const botStarted=Date.now();
-$('[data-bot]').forEach((b,i)=>{
+$$('[data-bot]').forEach((b,i)=>{
  b.dataset.verified='0';
  b.dataset.touched='0';
  b.innerHTML=`<label style="display:flex;align-items:center;gap:12px;width:100%;cursor:pointer;direction:rtl"><input type="checkbox" aria-label="أنا لست روبوتًا" style="width:22px;height:22px;accent-color:#5B4BFF;flex:0 0 22px"><span>أنا لست روبوتًا</span><span style="margin-right:auto;font-size:20px" aria-hidden="true">🛡️</span></label>`;
