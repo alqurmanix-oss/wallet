@@ -334,12 +334,12 @@ const TC={'Africa/Cairo':'EGP','Asia/Riyadh':'SAR','Asia/Dubai':'AED','Asia/Kuwa
 const RATE={USD:1,EGP:48.6,SAR:3.75,AED:3.67,KWD:.307,QAR:3.64,GBP:.78,EUR:.92,IQD:1310,MAD:9.9,TND:3.1,JOD:.71,TRY:34.5,INR:84};
 const CUR=TC[TZ]||'USD';
 let bal=0,lockI,adT=[];
-const NAV=[['عام',[['📊','نظرة عامة','#'],['🔔','الإشعارات','notifications.html']]],
-['الأموال',[['⬇️','إيداع','deposit.html'],['⬆️','سحب','withdraw.html'],['🔁','تحويل','transfer.html'],['📨','طلب أموال','requests.html'],['🧾','سجل المعاملات','transactions.html'],['👥','المستفيدون','beneficiaries.html'],['📷','الدفع عبر QR','qr.html'],['⏰','المدفوعات المجدولة','scheduled.html'],['🧮','الفواتير والخدمات','invoices.html']]],
-['الأصول والنمو',[['🪙','الذهب والفضة والماس','metals.html'],['💱','تبديل العملات','exchange.html'],['🐷','الادخار والأهداف','savings.html'],['📈','الاستثمار','invest.html'],['💳','البطاقات','cards.html'],['🎁','المكافآت والعروض','rewards.html'],['🤝','برنامج الإحالة','referral.html']]],
-['التقارير',[['📑','الكشوفات والتقارير','reports.html'],['🧾','التقارير الضريبية','tax.html'],['🎯','الحدود والمستويات','limits.html']]],
-['الحساب والأمان',[['👤','الملف الشخصي','profile.html'],['🪪','توثيق الهوية KYC','kyc.html'],['🛡️','مركز الأمان','security.html'],['📱','الأجهزة والجلسات','devices.html'],['🔐','المصادقة الثنائية','2fa.html'],['⚙️','الإعدادات','settings.html'],['🌐','اللغة والعملة','language.html']]],
-['الدعم والمعلومات',[['💬','الدعم والمساعدة','support.html'],['❓','مركز المساعدة','help.html'],['👨‍💻','المطورون API','developers.html'],['📜','السياسات والأحكام','terms.html'],['🔏','سياسة الخصوصية','privacy.html'],['⚖️','الشكاوى والنزاعات','disputes.html'],['ℹ️','عن AQX','about.html']]]];
+const NAV=[['الرئيسية',[['📊','نظرة عامة','wallet.html'],['🔔','الإشعارات','notifications.html']]],
+['الأموال',[['⬇️','إضافة أموال','add-funds.html'],['⬆️','سحب الأموال','withdraw.html'],['🔁','إرسال الأموال','send.html'],['📨','طلبات الأموال','requests.html'],['🧾','سجل العمليات','transactions.html'],['👥','المستفيدون','beneficiaries.html'],['📷','الدفع عبر QR','qr.html'],['⏰','المدفوعات المجدولة','scheduled.html'],['🧮','الفواتير والخدمات','invoices.html'],['↙️','استلام الأموال','receive.html']]],
+['الأصول والنمو',[['🪙','الذهب والفضة والألماس','metals.html'],['💱','تحويل العملات','exchange.html'],['🐷','الادخار والأهداف','savings.html'],['📈','الاستثمار','invest.html'],['💳','البطاقات','cards.html'],['🎁','المكافآت والعروض','rewards.html'],['🤝','برنامج الإحالة','referral.html']]],
+['التقارير',[['📑','كشوف الحساب والتقارير','statements.html'],['🧾','التقارير الضريبية','tax.html'],['🎯','الحدود والرسوم','limits.html']]],
+['الأمان والإعدادات',[['🪪','توثيق الهوية KYC','kyc.html'],['🛡️','مركز الأمان','security.html'],['📱','الأجهزة والجلسات','devices.html'],['🔐','المصادقة الثنائية','2fa.html'],['⚙️','إعدادات المحفظة','settings.html'],['🌐','اللغة والعملة','language.html']]],
+['الدعم والمعلومات',[['💬','الدعم الفني','support.html'],['❓','مركز المساعدة','help.html'],['👨‍💻','المطورون وواجهات API','developers.html'],['📜','الشروط والأحكام','policy-terms.html'],['🔏','سياسة الخصوصية','policy-privacy.html'],['⚖️','الشكاوى والنزاعات','disputes.html'],['ℹ️','عن AQX Wallet','about.html']]]];
 $('#nav').innerHTML=NAV.map(([t,a])=>`<h4>${t}</h4>`+a.map(([i,n,h],k)=>`<a href="${h}" class="${h==='#'&&t==='عام'&&!k?'act':''}"><span>${i}</span>${n}</a>`).join('')).join('')+'<h4>—</h4><a href="'+CFG.HOME+'">↩ العودة إلى بوابة AQX</a>';
 function renderBal(){$('#bal').textContent='— USD';$('#loc').textContent='ستظهر الأرصدة الفعلية بعد ربط قاعدة البيانات';const M=['🥇 الذهب','🥈 الفضة','💎 الألماس','⚪ البلاتين'];$('#mt').innerHTML=M.map(n=>`<div>${n}<b>—</b></div>`).join('')}
 let TX=[];
