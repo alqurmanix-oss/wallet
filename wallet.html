@@ -186,11 +186,25 @@ async function hash(p,salt){const k=await crypto.subtle.importKey('raw',new Text
 const rnd=n=>{const a=new Uint32Array(n);crypto.getRandomValues(a);return a};
 const name=new URLSearchParams(location.search).get('u')||L.aqx_name||'عميلنا الكريم';
 const show=id=>{['gate','create','login','app'].forEach(x=>$('#'+x).classList.toggle('hide',x!==id));scrollTo(0,0)};
-/* ===== تحقق البوتات ===== */
-const t0=Date.now();
-$$('[data-bot]').forEach(b=>{const a=2+rnd(1)[0]%8,c=2+rnd(1)[0]%8;b.dataset.ans=a+c;b.innerHTML=`🤖 هل أنت إنسان؟ ${a} + ${c} = <input inputmode="numeric" maxlength="2">`;
- b.querySelector('input').oninput=e=>{b.classList.toggle('ok',+e.target.value===+b.dataset.ans);chk()}});
-const bot=el=>el.closest('.card').querySelector('[data-bot]').classList.contains('ok')&&!el.closest('.card').querySelector('.hp').value&&Date.now()-t0>2500;
+/* ===== تحقق البوتات: مربع التحقق الأساسي ===== */
+const botStarted=Date.now();
+$('[data-bot]').forEach((b,i)=>{
+ b.dataset.verified='0';
+ b.dataset.touched='0';
+ b.innerHTML=`<label style="display:flex;align-items:center;gap:12px;width:100%;cursor:pointer;direction:rtl"><input type="checkbox" aria-label="أنا لست روبوتًا" style="width:22px;height:22px;accent-color:#5B4BFF;flex:0 0 22px"><span>أنا لست روبوتًا</span><span style="margin-right:auto;font-size:20px" aria-hidden="true">🛡️</span></label>`;
+ const c=b.querySelector('input[type="checkbox"]');
+ c.addEventListener('change',e=>{
+  if(!e.isTrusted)return;
+  b.dataset.touched='1';
+  const passed=c.checked&&Date.now()-botStarted>=2500;
+  b.dataset.verified=passed?'1':'0';
+  b.classList.toggle('ok',passed);
+  if(c.checked&&!passed){c.checked=false;b.dataset.verified='0'}
+  chk();
+ });
+});
+const bot=el=>{const c=el.closest('.card'),b=c&&c.querySelector('[data-bot]'),h=c&&c.querySelector('.hp');
+ return !!(b&&b.dataset.verified==='1'&&b.dataset.touched==='1'&&h&&!h.value&&Date.now()-botStarted>=2500)};
 /* ===== عين الإظهار ===== */
 $$('[data-eye]').forEach(b=>b.onclick=()=>{const i=$('#'+b.dataset.eye);i.type=i.type==='password'?'text':'password';b.textContent=i.type==='password'?'👁️':'🙈';beep(500,.05)});
 /* ===== البوابة الذكية ===== */
